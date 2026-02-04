@@ -2,7 +2,6 @@ import { useState } from "react";
 import Menu from "../Menu/Menu";
 
 function Border() {
-  const [count, setCount] = useState(0);
 
   return (
     <>

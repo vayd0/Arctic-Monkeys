@@ -2,7 +2,6 @@ import { useState } from "react";
 import Border from "../Border/Border";
 
 function Intro() {
-  const [count, setCount] = useState(0);
 
   return (
     <>
