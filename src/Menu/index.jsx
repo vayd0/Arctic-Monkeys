@@ -4,15 +4,30 @@ import { X } from "lucide-react";
 
 function Menu() {
   const linksSectionRef = useRef(null);
+  const closeBtnRef = useRef(null);
+  const arcticTextRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const menuContainerRef = useRef(null);
   useEffect(() => {
     if (menuContainerRef.current) {
       gsap.set(menuContainerRef.current, {
         bottom: isOpen ? "5rem" : "-16rem",
       });
     }
+    if (closeBtnRef.current) {
+      gsap.set(closeBtnRef.current, {
+        y: 0,
+        opacity: 1,
+        rotate: 0,
+      });
+    }
+    if (arcticTextRef.current) {
+      gsap.set(arcticTextRef.current, {
+        y: 0,
+        opacity: 1,
+      });
+    }
   }, []);
-  const [isOpen, setIsOpen] = useState(false);
-  const menuContainerRef = useRef(null);
 
   const openMenu = () => {
     gsap.to(menuContainerRef.current, {
@@ -29,6 +44,23 @@ function Menu() {
           { x: 0, opacity: 1, duration: 0.3, ease: "power2.out" },
         );
       }
+      if (closeBtnRef.current) {
+        gsap.to(closeBtnRef.current, {
+          y: 0,
+          opacity: 1,
+          rotate: 0,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      }
+      if (arcticTextRef.current) {
+        gsap.to(arcticTextRef.current, {
+          y: 0,
+          opacity: 1,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      }
     }, 120);
   };
 
@@ -42,6 +74,23 @@ function Menu() {
       if (linksSectionRef.current) {
         gsap.to(linksSectionRef.current, {
           x: 400,
+          opacity: 0,
+          duration: 0.3,
+          ease: "power2.in",
+        });
+      }
+      if (closeBtnRef.current) {
+        gsap.to(closeBtnRef.current, {
+          y: -40,
+          opacity: 0,
+          rotate: 90,
+          duration: 0.3,
+          ease: "power2.in",
+        });
+      }
+      if (arcticTextRef.current) {
+        gsap.to(arcticTextRef.current, {
+          y: 60,
           opacity: 0,
           duration: 0.3,
           ease: "power2.in",
@@ -99,9 +148,11 @@ function Menu() {
                 Menu
               </h1>
               <span
+                ref={closeBtnRef}
                 className={`cursor-pointer ${isOpen ? "z-[102]" : "z-[1]"}`}
                 id="closeBtn"
                 onClick={closeMenu}
+                style={{ display: "inline-block" }}
               >
                 <X color="black" size={25} />
               </span>
@@ -129,7 +180,8 @@ function Menu() {
           )}
 
           <section
-            className="absolute right-[7rem] bottom-[6rem] text-start text-[5vw]"
+            ref={arcticTextRef}
+            className="absolute right-[7rem] bottom-[6rem] text-start text-[5vw] md:text-[2.5rem]"
             style={{ opacity: 1 }}
           >
             <h1 className="stretched text-black">ARCTIC <br/>MOONKEYS</h1>
