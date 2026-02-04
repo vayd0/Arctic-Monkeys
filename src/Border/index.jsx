@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Menu from "../Menu/Menu";
+import Menu from "../Menu";
 
 function Border() {
 

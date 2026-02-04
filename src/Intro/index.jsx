@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Border from "../Border/Border";
+import Border from "../Border";
 
 function Intro() {
 
