@@ -16,6 +16,7 @@ function Group() {
 
   // Refs pour les divs infos
   const infoRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
+  const SCALE = 1.2; // facteur d'agrandissement global (changez à volonté)
 
   const handleMouseEnter = (idx) => {
     gsap.to(imgRefs[idx].current, {
@@ -64,7 +65,7 @@ function Group() {
             <div
               ref={infoRefs[0]}
               className="infos absolute -top-1 -left-12 overflow-visible z-[2000]"
-              style={{ opacity: 0 }}
+              style={{ opacity: 0, transform: `scale(${SCALE})`, transformOrigin: "top left" }}
             >
               <div className="absolute -top-3 left-6 h-10 w-[10rem] z-[2010]">
                 <TextBlock content="Nick O'Malley" color="#fff" />
@@ -94,7 +95,7 @@ function Group() {
             src="/4.png"
             alt="Image 4"
             className="absolute z-[1]"
-            style={{ width: "220px", height: "auto" }}
+            style={{ width: "220px", height: "auto", transform: `scale(${SCALE})`, transformOrigin: "top left" }}
             onMouseEnter={() => handleMouseEnter(0)}
             onMouseLeave={() => handleMouseLeave(0)}
           />
@@ -105,7 +106,7 @@ function Group() {
             <div
               ref={infoRefs[1]}
               className="infos absolute -top-1 left-27 overflow-visible z-[2000]"
-              style={{ opacity: 0 }}
+              style={{ opacity: 0, transform: `scale(${SCALE})`, transformOrigin: "top left" }}
             >
               <div className="absolute -top-3 left-7 h-10 w-[10rem] z-[2010]">
                 <TextBlock content="Matt Helders" />
@@ -134,7 +135,7 @@ function Group() {
             src="/1.png"
             alt="Image 1"
             className="absolute z-[2]"
-            style={{ width: "220px", height: "auto" }}
+            style={{ width: "220px", height: "auto", transform: `scale(${SCALE})`, transformOrigin: "top left" }}
             onMouseEnter={() => handleMouseEnter(1)}
             onMouseLeave={() => handleMouseLeave(1)}
           />
@@ -153,7 +154,7 @@ function Group() {
             <div
               ref={infoRefs[2]}
               className="infos absolute -top-1 -left-12 overflow-visible z-[2000]"
-              style={{ opacity: 0 }}
+              style={{ opacity: 0, transform: `scale(${SCALE})`, transformOrigin: "top left" }}
             >
               <div className="absolute -top-3 left-1 h-10 w-[10rem] z-[2010]">
                 <TextBlock content="Alex Turner" />
@@ -183,7 +184,7 @@ function Group() {
             src="/2.png"
             alt="Image 2"
             className="absolute z-[5]"
-            style={{ width: "220px", height: "auto" }}
+            style={{ width: "220px", height: "auto", transform: `scale(${SCALE})`, transformOrigin: "top left" }}
             onMouseEnter={() => handleMouseEnter(2)}
             onMouseLeave={() => handleMouseLeave(2)}
           />
@@ -194,7 +195,7 @@ function Group() {
             <div
               ref={infoRefs[3]}
               className="infos absolute -top-1 -left-12 overflow-visible z-[2000]"
-              style={{ opacity: 0 }}
+              style={{ opacity: 0, transform: `scale(${SCALE})`, transformOrigin: "top left" }}
             >
               <div className="absolute -top-3 left-1 h-10 w-[10rem] z-[2010]">
                 <TextBlock content="Jamie Cook" />
@@ -224,7 +225,7 @@ function Group() {
             src="/3.png"
             alt="Image 3"
             className="absolute z-[4]"
-            style={{ width: "220px", height: "auto" }}
+            style={{ width: "220px", height: "auto", transform: `scale(${SCALE})`, transformOrigin: "top left" }}
             onMouseEnter={() => handleMouseEnter(3)}
             onMouseLeave={() => handleMouseLeave(3)}
           />
@@ -232,7 +233,7 @@ function Group() {
       </div>
       <div className="absolute left-2 bottom-10 md:left-20 md:bottom-20 max-w-1/2 md:max-w-1/3 flex justify-center items-center z-[105]">
         <svg
-          className="absolute -top-14 -right-12 z-[2010]"
+          className="absolute -top-4 -right-65 z-[2010]"
           width="200"
           height="46"
           viewBox="0 0 197 46"
@@ -240,7 +241,8 @@ function Group() {
           xmlns="http://www.w3.org/2000/svg"
           style={{
             mixBlendMode: "difference",
-            transform: "scaleX(-1) scaleY(-1)",
+            transform: `scaleX(-1) scaleY(-1) scale(${SCALE})`,
+            transformOrigin: "top left",
           }}
         >
           <path
@@ -249,7 +251,7 @@ function Group() {
             strokeWidth="2"
           />
         </svg>
-        <div className="w-full h-full p-[20px] bg-white text-black orbitron">
+  <div className="w-full h-full p-[20px] bg-white text-black orbitron">
           Arctic Monkeys est un groupe britannique de rock  indépendant, originaire de Sheffield, Yorkshire du Sud, en Angleterre. Il est formé en 2002, plus précisément à High Green, une banlieue de  Sheffield.
         </div>
       </div>
