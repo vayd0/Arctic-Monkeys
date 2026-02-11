@@ -9,10 +9,13 @@ function Group() {
   useEffect(() => {
     imgRefs.forEach((ref) => {
       if (ref.current) {
-        gsap.set(ref.current, { filter: "blur(3px)" });
+        gsap.set(ref.current, { filter: "blur(2px)" });
       }
     });
   }, []);
+
+  // Refs pour les divs infos
+  const infoRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
 
   const handleMouseEnter = (idx) => {
     gsap.to(imgRefs[idx].current, {
@@ -21,28 +24,53 @@ function Group() {
       overwrite: "auto",
     });
     setHovered((prev) => prev.map((v, i) => (i === idx ? true : v)));
+    // Animation apparition
+    setTimeout(() => {
+      if (infoRefs[idx].current) {
+        gsap.fromTo(
+          infoRefs[idx].current,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+        );
+      }
+    }, 10);
   };
   const handleMouseLeave = (idx) => {
     gsap.to(imgRefs[idx].current, {
-      filter: "blur(6px)",
+      filter: "blur(2px)",
       duration: 0.3,
       overwrite: "auto",
     });
-    setHovered((prev) => prev.map((v, i) => (i === idx ? false : v)));
+    // Animation disparition
+    if (infoRefs[idx].current) {
+      gsap.to(infoRefs[idx].current, {
+        opacity: 0,
+        y: 20,
+        duration: 0.3,
+        ease: "power2.in",
+      });
+    }
+    setTimeout(() => {
+      setHovered((prev) => prev.map((v, i) => (i === idx ? false : v)));
+    }, 250);
   };
 
   return (
     <div className="relative w-screen h-screen mx-auto">
       <div className="relative mx-auto w-[20rem] md:w-[50rem] h-[18rem]">
         {/* Image 4 */}
-        <div className="relative w-[220px] h-auto overflow-visible" style={{ position: 'absolute', top: 0, left: 0, zIndex: 1 }}>
+        <div className="absolute -top-3 left-8 z-[1] w-[220px] h-auto overflow-visible">
           {hovered[0] && (
-            <div className="infos absolute -top-1 -left-12 overflow-visible">
-              <div className="absolute -top-3 left-1 h-10 w-32 z-[100]">
-                <TextBlock content="Nick O'Malley" />
+            <div
+              ref={infoRefs[0]}
+              className="infos absolute -top-1 -left-12 overflow-visible z-[2000]"
+              style={{ opacity: 0 }}
+            >
+              <div className="absolute -top-3 left-6 h-10 w-[10rem] z-[2010]">
+                <TextBlock content="Nick O'Malley" color="#fff" />
               </div>
               <svg
-                className="absolute top-6 left-1 z-[100]"
+                className="absolute top-6 left-1 z-[2010]"
                 width="100"
                 height="46"
                 viewBox="0 0 197 46"
@@ -72,14 +100,18 @@ function Group() {
           />
         </div>
         {/* Image 1 */}
-        <div className="relative w-[220px] h-auto overflow-visible" style={{ position: 'absolute', top: '1rem', left: '25rem', zIndex: 2 }}>
+        <div className="absolute top-1 left-80 z-[2] w-[220px] h-auto overflow-visible ">
           {hovered[1] && (
-            <div className="infos absolute -top-1 left-27 overflow-visible">
-              <div className="absolute -top-3 left-7 h-10 w-32 z-[9999]">
+            <div
+              ref={infoRefs[1]}
+              className="infos absolute -top-1 left-27 overflow-visible z-[2000]"
+              style={{ opacity: 0 }}
+            >
+              <div className="absolute -top-3 left-7 h-10 w-[10rem] z-[2010]">
                 <TextBlock content="Matt Helders" />
               </div>
               <svg
-                className="absolute top-6 left-1 z-[999]"
+                className="absolute top-6 left-1 z-[2010]"
                 width="100"
                 height="46"
                 viewBox="0 0 197 46"
@@ -108,14 +140,26 @@ function Group() {
           />
         </div>
         {/* Image 2 */}
-        <div className="relative w-[220px] h-auto overflow-visible" style={{ position: 'absolute', top: '7rem', left: '15rem', zIndex: 5 }}>
+        <div
+          className="relative w-[220px] h-auto overflow-visible"
+          style={{
+            position: "absolute",
+            top: "7rem",
+            left: "15rem",
+            zIndex: 5,
+          }}
+        >
           {hovered[2] && (
-            <div className="infos absolute -top-1 -left-12 overflow-visible">
-              <div className="absolute -top-3 left-1 h-10 w-32 z-[9999]">
+            <div
+              ref={infoRefs[2]}
+              className="infos absolute -top-1 -left-12 overflow-visible z-[2000]"
+              style={{ opacity: 0 }}
+            >
+              <div className="absolute -top-3 left-1 h-10 w-[10rem] z-[2010]">
                 <TextBlock content="Alex Turner" />
               </div>
               <svg
-                className="absolute top-6 left-1 z-[999]"
+                className="absolute top-6 left-1 z-[2010]"
                 width="100"
                 height="46"
                 viewBox="0 0 197 46"
@@ -145,14 +189,18 @@ function Group() {
           />
         </div>
         {/* Image 3 */}
-        <div className="relative w-[220px] h-auto overflow-visible" style={{ position: 'absolute', top: '60px', left: '5rem', zIndex: 4 }}>
+        <div className="absolute top-24 left-28 z-[4] w-[300px] overflow-visible">
           {hovered[3] && (
-            <div className="infos absolute -top-1 -left-12 overflow-visible">
-              <div className="absolute -top-3 left-1 h-10 w-32 z-[9999]">
+            <div
+              ref={infoRefs[3]}
+              className="infos absolute -top-1 -left-12 overflow-visible z-[2000]"
+              style={{ opacity: 0 }}
+            >
+              <div className="absolute -top-3 left-1 h-10 w-[10rem] z-[2010]">
                 <TextBlock content="Jamie Cook" />
               </div>
               <svg
-                className="absolute top-6 left-1 z-[999]"
+                className="absolute top-6 left-1 z-[2010]"
                 width="100"
                 height="46"
                 viewBox="0 0 197 46"
@@ -180,6 +228,29 @@ function Group() {
             onMouseEnter={() => handleMouseEnter(3)}
             onMouseLeave={() => handleMouseLeave(3)}
           />
+        </div>
+      </div>
+      <div className="absolute left-2 bottom-10 md:left-20 md:bottom-20 max-w-1/2 md:max-w-1/3 flex justify-center items-center z-[105]">
+        <svg
+          className="absolute -top-14 -right-12 z-[2010]"
+          width="200"
+          height="46"
+          viewBox="0 0 197 46"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{
+            mixBlendMode: "difference",
+            transform: "scaleX(-1) scaleY(-1)",
+          }}
+        >
+          <path
+            d="M0.702087 45L45.3321 1H196.702"
+            stroke="white"
+            strokeWidth="2"
+          />
+        </svg>
+        <div className="w-full h-full p-[20px] bg-white text-black orbitron">
+          Arctic Monkeys est un groupe britannique de rock  indépendant, originaire de Sheffield, Yorkshire du Sud, en Angleterre. Il est formé en 2002, plus précisément à High Green, une banlieue de  Sheffield.
         </div>
       </div>
     </div>

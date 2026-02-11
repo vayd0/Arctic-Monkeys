@@ -9,13 +9,13 @@ function Intro() {
       <div className="relative h-[100vh] w-[100vw] overflow-hidden flex items-center">
         <section className="w-[15rem] md:w-[30rem] flex items-center mx-auto gap-2 z-[350]">
           <div className="h-[3rem] w-[10rem] m-auto">
-            <TextBlock content="Discover" />
+            <TextBlock contrast={1} content="Discover" />
           </div>
           <div className="h-[3rem] w-[10rem] m-auto hidden md:block">
-            <TextBlock content="Welcome" />
+            <TextBlock contrast={1} content="Welcome" />
           </div>
           <div className="h-[3rem] w-[10rem] m-auto">
-            <TextBlock content="Musics" />
+            <TextBlock contrast={1} content="Musics" />
           </div>
         </section>
 
