@@ -14,9 +14,8 @@ function Group() {
     });
   }, []);
 
-  // Refs pour les divs infos
   const infoRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
-  const SCALE = 1.2; // facteur d'agrandissement global (changez à volonté)
+  const SCALE = 1.2;
 
   const handleMouseEnter = (idx) => {
     gsap.to(imgRefs[idx].current, {
@@ -25,7 +24,6 @@ function Group() {
       overwrite: "auto",
     });
     setHovered((prev) => prev.map((v, i) => (i === idx ? true : v)));
-    // Animation apparition
     setTimeout(() => {
       if (infoRefs[idx].current) {
         gsap.fromTo(
@@ -42,7 +40,6 @@ function Group() {
       duration: 0.3,
       overwrite: "auto",
     });
-    // Animation disparition
     if (infoRefs[idx].current) {
       gsap.to(infoRefs[idx].current, {
         opacity: 0,
@@ -59,7 +56,6 @@ function Group() {
   return (
     <div className="relative w-screen h-screen mx-auto">
       <div className="relative mx-auto w-[20rem] md:w-[50rem] h-[18rem]">
-        {/* Image 4 */}
         <div className="absolute -top-3 left-8 z-[1] w-[220px] h-auto overflow-visible">
           {hovered[0] && (
             <div
@@ -100,7 +96,6 @@ function Group() {
             onMouseLeave={() => handleMouseLeave(0)}
           />
         </div>
-        {/* Image 1 */}
         <div className="absolute top-1 left-80 z-[2] w-[220px] h-auto overflow-visible ">
           {hovered[1] && (
             <div
@@ -140,7 +135,6 @@ function Group() {
             onMouseLeave={() => handleMouseLeave(1)}
           />
         </div>
-        {/* Image 2 */}
         <div
           className="relative w-[220px] h-auto overflow-visible"
           style={{
@@ -189,7 +183,6 @@ function Group() {
             onMouseLeave={() => handleMouseLeave(2)}
           />
         </div>
-        {/* Image 3 */}
         <div className="absolute top-24 left-28 z-[4] w-[300px] overflow-visible">
           {hovered[3] && (
             <div
@@ -251,7 +244,7 @@ function Group() {
             strokeWidth="2"
           />
         </svg>
-  <div className="w-full h-full p-[20px] bg-white text-black orbitron">
+  <div className="relative w-full h-full p-[20px] bg-black text-white orbitron border-white border-15 z-[2000]">
           Arctic Monkeys est un groupe britannique de rock  indépendant, originaire de Sheffield, Yorkshire du Sud, en Angleterre. Il est formé en 2002, plus précisément à High Green, une banlieue de  Sheffield.
         </div>
       </div>
