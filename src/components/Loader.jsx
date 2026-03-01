@@ -9,6 +9,7 @@ function Loader({ duration = 2000, size = 64, onEnd }) {
 
   useEffect(() => {
     if (svgRef.current) {
+      gsap.set(svgRef.current, { scale: 0.05 });
       gsap.to(svgRef.current, {
         rotation: 360,
         duration: duration / 1000,
@@ -24,7 +25,7 @@ function Loader({ duration = 2000, size = 64, onEnd }) {
     if (expand && svgRef.current) {
       const tl = gsap.timeline({ onComplete: () => setFadeOut(true) });
       tl.to(svgRef.current, {
-        scale: 100,
+        scale: 10,
         rotation: 120,
         duration: 1.2,
         ease: "expo.in",
@@ -69,8 +70,8 @@ function Loader({ duration = 2000, size = 64, onEnd }) {
     >
       <svg
         ref={svgRef}
-        width={size}
-        height={size}
+        width={1200}
+        height={1350}
         viewBox="0 0 58 65"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
