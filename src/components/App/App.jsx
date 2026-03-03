@@ -120,7 +120,7 @@ function App() {
               />
             </svg>
           </section>
-          <section className="h-[100vh] bg-green-400 relative overflow-hidden">
+          <section className="h-[100vh] bg-black relative overflow-hidden">
             <svg
               className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block"
               width="180vw"
