@@ -43,7 +43,7 @@ function App() {
           }}
         >
           <Intro />
-          <section className="fixed top-0 left-0 z-[999999] relative h-[100vh] overflow-hidden">
+          <section className="top-0 left-0 z-999999 relative h-screen overflow-hidden">
             <svg
               width="1902"
               height="375"
@@ -120,56 +120,52 @@ function App() {
               />
             </svg>
           </section>
-          <section className="h-[100vh] bg-black relative overflow-hidden">
-            <article className="absolute flex justify-center items-center p-4 top-1/2 bottom-1/2 right-1/2 left-1/2 bg-blend-difference border border-white/50 w-100 aspect-[1/1.05] backdrop-blur-3xl -translate-x-1/2 -translate-y-1/2 z-999 rounded-3xl">
-            <img src="" alt="" />
-            </article>
-            <svg
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block"
-              width="180vw"
-              height="120vh"
-              viewBox="0 0 1275 784"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              style={{ minWidth: "100vw", minHeight: "100vh" }}
-            >
-              <path
-                d="M1275 784H0V0H1275V784ZM683.643 236.255L683.569 236.279L683.501 236.313L582.01 287.369L215.021 141.984L213.912 143.586L427.11 378.468L169.436 554.619L170.313 556.395L442.139 466.679L638.593 661.959L639.472 662.832L640.14 661.79L737.041 510.705L1026.92 662.137L1028.15 660.612L799.802 385.041L1105.68 101.984L1104.69 100.299L683.643 236.255ZM797.749 384.217L797.054 384.859L797.658 385.589L1023.44 658.063L737.157 508.509L736.346 508.085L735.853 508.855L639.124 659.667L443.113 464.828L442.679 464.396L442.096 464.588L176.405 552.277L429.188 379.472L430.136 378.824L429.364 377.974L218.284 145.428L581.691 289.395L582.108 289.56L582.509 289.358L684.333 238.134L1100.99 103.593L797.749 384.217ZM714.089 250.142L714 250.166L713.918 250.207L592.239 310.021L283.645 186.086L282.536 187.692L464.846 385.495L282.73 502.544L283.615 504.324L454.995 441.622L634.164 626.144L635.031 627.037L635.717 625.997L736.306 473.242L938.324 583.792L939.575 582.277L777.103 385.801L1028.16 163.876L1027.23 162.164L714.089 250.142Z"
-                fill="white"
-              />
-            </svg>
+          <section className="h-screen w-screen mx-auto bg-black relative overflow-hidden flex items-center justify-center">
+  
+ {Array.from({ length: 5 }).map((_, row) => (
+  <div
+    key={row}
+    className="absolute flex"
+    style={{
+      top: `${row * 20}%`,
+      height: '20%',
+      width: 'max-content',
+      animation: `slideRow ${12 + row * 3}s linear infinite ${row % 2 === 0 ? 'normal' : 'reverse'}`,
+    }}
+  >
+    {[0, 1, 2].map((repeat) =>
+      Array.from({ length: 8 }).map((_, col) => (
+        <div
+          key={`${repeat}-${col}`}
+          className="shrink-0 aspect-square h-full"
+        >
+          <img
+            src={`/covers/${['505.png', 'am.png', 'htl.png', 'beneath.png', 'humbug.png', 'liveatroyal.png', 'when.png', 'we.png'][(row * 8 + col) % 6]}`}
+            alt={`cover-${row}-${col}`}
+            className="w-full h-full object-cover border-2 border-white"
+          />
+        </div>
+      ))
+    )}
+  </div>
+))}
 
-            <svg
-              id="flèche"
-              width="32"
-              height="40"
-              viewBox="0 0 91 115"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="absolute right-5 md:right-20 top-1/2 -translate-y-1/2"
-              style={{ zIndex: 2 }}
-            >
-              <path
-                d="M90.5 50.5L0 0L50.5 50.5L0 115L90.5 50.5Z"
-                fill="black"
-              />
-            </svg>
-            <svg
-              id="flèche-gauche"
-              width="32"
-              height="40"
-              viewBox="0 0 91 115"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="absolute left-5 md:left-20 top-1/2 -translate-y-1/2 rotate-[-180deg]"
-              style={{ zIndex: 2 }}
-            >
-              <path
-                d="M90.5 50.5L0 0L50.5 50.5L0 115L90.5 50.5Z"
-                fill="black"
-              />
-            </svg>
-          </section>
+  <article className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col gap-4 justify-center items-center p-4 border border-white/50 w-[80vw] md:w-90 backdrop-blur-3xl z-[999] rounded-3xl"
+    style={{ aspectRatio: '1.4 / 0.8' }}
+  >
+    <img className="absolute bottom-1/2 mb-10 rounded-xl w-24 md:w-30" src="/covers/505.png" alt="Cover" />
+    <p className="text-white orbitron">505</p>
+    <progress value="70" max="100" className="absolute bottom-6 w-[70%] h-3 border-2 border-white" />
+    <svg width="32" height="40" viewBox="0 0 91 115" fill="none" xmlns="http://www.w3.org/2000/svg"
+      className="absolute right-4 md:right-20 top-1/2 -translate-y-1/2" style={{ zIndex: 2 }}>
+      <path d="M90.5 50.5L0 0L50.5 50.5L0 115L90.5 50.5Z" fill="white" />
+    </svg>
+    <svg width="32" height="40" viewBox="0 0 91 115" fill="none" xmlns="http://www.w3.org/2000/svg"
+      className="absolute left-4 md:left-20 top-1/2 -translate-y-1/2 rotate-180" style={{ zIndex: 2 }}>
+      <path d="M90.5 50.5L0 0L50.5 50.5L0 115L90.5 50.5Z" fill="white" />
+    </svg>
+  </article>
+</section>
         </div>
       )}
     </>

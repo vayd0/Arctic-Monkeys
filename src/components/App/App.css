@@ -1,0 +1,36 @@
+progress {
+	appearance: none;
+	-webkit-appearance: none;
+	height: 1rem;
+	background: black;
+	overflow: hidden;
+}
+progress::-webkit-progress-bar {
+	background: black;
+    border: 2px solid white;
+}
+progress::-webkit-progress-value {
+	background: white;
+	transition: width 0.3s;
+    border:2px solid black;
+}
+progress::-moz-progress-bar {
+	background: white;
+	transition: width 0.3s;
+    border:2px solid black;
+}
+progress::-ms-fill {
+	background: white;
+	transition: width 0.3s;
+    border:2px solid black;
+}
+progress[value] {
+	color: white;
+	background: black;
+    border: 1px solid white;
+}
+
+@keyframes slideRow {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-33.333%); }
+}
