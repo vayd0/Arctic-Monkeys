@@ -121,6 +121,9 @@ function App() {
             </svg>
           </section>
           <section className="h-[100vh] bg-black relative overflow-hidden">
+            <article className="absolute flex justify-center items-center p-4 top-1/2 bottom-1/2 right-1/2 left-1/2 bg-blend-difference border border-white/50 w-100 aspect-[1/1.05] backdrop-blur-3xl -translate-x-1/2 -translate-y-1/2 z-999 rounded-3xl">
+            <img src="" alt="" />
+            </article>
             <svg
               className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block"
               width="180vw"
