@@ -19,41 +19,12 @@ function Intro() {
           </div>
         </section>
 
-        {/*Desktop*/}
         <section className="hidden md:block">
           <article className="absolute z-[0] top-[0] left-[0] m-10 p-0 w-[120vw] h-[120vh]">
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                position: "relative",
-              }}
-            >
-              <Dither
-                waveColor={[1, 1, 1]}
-                disableAnimation={false}
-                colorNum={4}
-                pixelSize={2}
-                waveAmplitude={0.3}
-                waveFrequency={3}
-                waveSpeed={0.05}
-              />
-            </div>
-          </article>
-          <article className="absolute z-[300] top-[10rem] right-[5rem] m-10 p-0 w-[50vw]">
             <Video name="RUM.mp4" style={{ filter: "grayscale(100%)" }} />
           </article>
-          <article className="absolute z-[300] top-[7rem] left-[10rem] m-10 p-0 w-[35vw]">
-            <Video name="RUM.mp4" style={{ filter: "grayscale(100%)" }} />
-          </article>
-          <article className="absolute z-[300] bottom-[10rem] left-[15rem] m-10 p-0 w-[40vw]">
-            <Video name="RUM.mp4" style={{ filter: "grayscale(100%)" }} />
-          </article>
-          <article className="absolute z-[300] top-[17rem] right-[15rem] m-10 p-0 w-[30vw]">
-            <Video name="RUM.mp4" style={{ filter: "grayscale(100%)" }} />
-          </article>
+
         </section>
-        {/*Mobile*/}
         <section className="absolute block md:hidden">
           <article className="w-[100vw] h-[100vh]">
             <Video name="LVTLC.mp4" />

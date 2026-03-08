@@ -2,27 +2,16 @@ import { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 import Intro from "../Intro";
 import TextBlock from "../TextBlock";
+import Dither from "../Dither";
+
 function Group() {
   const imgRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
   const [hovered, setHovered] = useState([false, false, false, false]);
-
-  useEffect(() => {
-    imgRefs.forEach((ref) => {
-      if (ref.current) {
-        gsap.set(ref.current, { filter: "blur(2px)" });
-      }
-    });
-  }, []);
 
   const infoRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
   const SCALE = 1.2;
 
   const handleMouseEnter = (idx) => {
-    gsap.to(imgRefs[idx].current, {
-      filter: "blur(0px)",
-      duration: 0.3,
-      overwrite: "auto",
-    });
     setHovered((prev) => prev.map((v, i) => (i === idx ? true : v)));
     setTimeout(() => {
       if (infoRefs[idx].current) {
@@ -35,11 +24,6 @@ function Group() {
     }, 10);
   };
   const handleMouseLeave = (idx) => {
-    gsap.to(imgRefs[idx].current, {
-      filter: "blur(2px)",
-      duration: 0.3,
-      overwrite: "auto",
-    });
     if (infoRefs[idx].current) {
       gsap.to(infoRefs[idx].current, {
         opacity: 0,
@@ -55,13 +39,36 @@ function Group() {
 
   return (
     <div className="relative w-screen h-screen mx-auto">
+      <article className="absolute -z-1 top-[0] left-[0] m-10 p-0 w-[120vw] h-[120vh]">
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            position: "relative",
+          }}
+        >
+          <Dither
+            waveColor={[1, 1, 1]}
+            disableAnimation={false}
+            colorNum={4}
+            pixelSize={2}
+            waveAmplitude={0.3}
+            waveFrequency={3}
+            waveSpeed={0.05}
+          />
+        </div>
+      </article>
       <div className="relative mx-auto w-[20rem] md:w-[50rem] h-[18rem]">
         <div className="absolute -top-3 left-8 z-[1] w-[220px] h-auto overflow-visible">
           {hovered[0] && (
             <div
               ref={infoRefs[0]}
               className="infos absolute -top-1 -left-12 overflow-visible z-[2000]"
-              style={{ opacity: 0, transform: `scale(${SCALE})`, transformOrigin: "top left" }}
+              style={{
+                opacity: 0,
+                transform: `scale(${SCALE})`,
+                transformOrigin: "top left",
+              }}
             >
               <div className="absolute -top-3 left-6 h-10 w-[10rem] z-[2010]">
                 <TextBlock content="Nick O'Malley" color="#fff" />
@@ -91,7 +98,12 @@ function Group() {
             src="/4.png"
             alt="Image 4"
             className="absolute z-[1]"
-            style={{ width: "220px", height: "auto", transform: `scale(${SCALE})`, transformOrigin: "top left" }}
+            style={{
+              width: "220px",
+              height: "auto",
+              transform: `scale(${SCALE})`,
+              transformOrigin: "top left",
+            }}
             onMouseEnter={() => handleMouseEnter(0)}
             onMouseLeave={() => handleMouseLeave(0)}
           />
@@ -101,7 +113,11 @@ function Group() {
             <div
               ref={infoRefs[1]}
               className="infos absolute -top-1 left-27 overflow-visible z-[2000]"
-              style={{ opacity: 0, transform: `scale(${SCALE})`, transformOrigin: "top left" }}
+              style={{
+                opacity: 0,
+                transform: `scale(${SCALE})`,
+                transformOrigin: "top left",
+              }}
             >
               <div className="absolute -top-3 left-7 h-10 w-[10rem] z-[2010]">
                 <TextBlock content="Matt Helders" />
@@ -130,7 +146,12 @@ function Group() {
             src="/1.png"
             alt="Image 1"
             className="absolute z-[2]"
-            style={{ width: "220px", height: "auto", transform: `scale(${SCALE})`, transformOrigin: "top left" }}
+            style={{
+              width: "220px",
+              height: "auto",
+              transform: `scale(${SCALE})`,
+              transformOrigin: "top left",
+            }}
             onMouseEnter={() => handleMouseEnter(1)}
             onMouseLeave={() => handleMouseLeave(1)}
           />
@@ -148,7 +169,11 @@ function Group() {
             <div
               ref={infoRefs[2]}
               className="infos absolute -top-1 -left-12 overflow-visible z-[2000]"
-              style={{ opacity: 0, transform: `scale(${SCALE})`, transformOrigin: "top left" }}
+              style={{
+                opacity: 0,
+                transform: `scale(${SCALE})`,
+                transformOrigin: "top left",
+              }}
             >
               <div className="absolute -top-3 left-1 h-10 w-[10rem] z-[2010]">
                 <TextBlock content="Alex Turner" />
@@ -178,7 +203,12 @@ function Group() {
             src="/2.png"
             alt="Image 2"
             className="absolute z-[5]"
-            style={{ width: "220px", height: "auto", transform: `scale(${SCALE})`, transformOrigin: "top left" }}
+            style={{
+              width: "220px",
+              height: "auto",
+              transform: `scale(${SCALE})`,
+              transformOrigin: "top left",
+            }}
             onMouseEnter={() => handleMouseEnter(2)}
             onMouseLeave={() => handleMouseLeave(2)}
           />
@@ -188,7 +218,11 @@ function Group() {
             <div
               ref={infoRefs[3]}
               className="infos absolute -top-1 -left-12 overflow-visible z-[2000]"
-              style={{ opacity: 0, transform: `scale(${SCALE})`, transformOrigin: "top left" }}
+              style={{
+                opacity: 0,
+                transform: `scale(${SCALE})`,
+                transformOrigin: "top left",
+              }}
             >
               <div className="absolute -top-3 left-1 h-10 w-[10rem] z-[2010]">
                 <TextBlock content="Jamie Cook" />
@@ -218,7 +252,12 @@ function Group() {
             src="/3.png"
             alt="Image 3"
             className="absolute z-[4]"
-            style={{ width: "220px", height: "auto", transform: `scale(${SCALE})`, transformOrigin: "top left" }}
+            style={{
+              width: "220px",
+              height: "auto",
+              transform: `scale(${SCALE})`,
+              transformOrigin: "top left",
+            }}
             onMouseEnter={() => handleMouseEnter(3)}
             onMouseLeave={() => handleMouseLeave(3)}
           />
@@ -244,8 +283,10 @@ function Group() {
             strokeWidth="2"
           />
         </svg>
-  <div className="relative w-full h-full p-[20px] bg-black text-white orbitron border-white border-15 z-[2000]">
-          Arctic Monkeys est un groupe britannique de rock  indépendant, originaire de Sheffield, Yorkshire du Sud, en Angleterre. Il est formé en 2002, plus précisément à High Green, une banlieue de  Sheffield.
+        <div className="relative w-full h-full p-[20px] bg-black text-white orbitron border-white border-15 z-[2000]">
+          Arctic Monkeys est un groupe britannique de rock indépendant,
+          originaire de Sheffield, Yorkshire du Sud, en Angleterre. Il est formé
+          en 2002, plus précisément à High Green, une banlieue de Sheffield.
         </div>
       </div>
     </div>
