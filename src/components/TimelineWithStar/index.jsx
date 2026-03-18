@@ -22,6 +22,19 @@ const SEGS = (() => {
   return { s, total };
 })();
 
+// t values at each rectangular waypoint (PTS[1], PTS[2], PTS[3])
+export const T_WAYPOINTS = [
+  SEGS.s[0].len / SEGS.total,
+  (SEGS.s[0].len + SEGS.s[1].len) / SEGS.total,
+  1.0,
+];
+
+export const TIMELINE_ITEMS = [
+  { id: 1, year: "2006", title: "Whatever People Say I Am, That's What I'm Not", body: "Debut album. Recorded in Sheffield for £10k, it became the fastest-selling debut in UK chart history — raw, urgent, and completely alive." },
+  { id: 2, year: "2009", title: "Humbug", body: "Produced with Josh Homme in the California desert. A dark, psychedelic pivot that proved the band were done playing it safe." },
+  { id: 3, year: "2013", title: "AM", body: "Their fifth album and global breakthrough. Stoner-rock riffs, R&B influence, and Turner's most cinematic lyricism — a modern classic." },
+];
+
 function pointAt(t) {
   let target = t * SEGS.total;
   let acc = 0;
@@ -37,10 +50,12 @@ function pointAt(t) {
 }
 
 // Star size in viewBox units
-const STAR_VB = 500;
+const STAR_VB = 450;
+const CARD_THRESHOLD = 0.15;
 
-export default function TimelineWithStar({ progressRef, sectionRef }) {
-  const starGRef  = useRef(null); // <g> inside SVG — always pixel-perfect
+export default function TimelineWithStar({ progressRef, sectionRef, cardsRef }) {
+  const starGRef  = useRef(null);
+  const svgRef    = useRef(null);
   const rafRef    = useRef(null);
   const currentT  = useRef(0);
   const targetT   = useRef(0);
@@ -48,6 +63,8 @@ export default function TimelineWithStar({ progressRef, sectionRef }) {
   const rotYCur   = useRef(0);
   const rotZCur   = useRef(0);
   const scaleCur  = useRef(1);
+  const perspRotY = useRef(0);
+  const perspRotX = useRef(0);
 
   useEffect(() => {
     const onScroll = () => {
@@ -80,11 +97,28 @@ export default function TimelineWithStar({ progressRef, sectionRef }) {
       rotZCur.current  += (normX * 18  - rotZCur.current)  * 0.06;
       scaleCur.current += ((0.7 + normY * 0.6) - scaleCur.current) * 0.06;
 
-      // Star lives inside the SVG — move it in viewBox space, perfect alignment guaranteed
+      // Perspective 3D sur le SVG entier
+      perspRotY.current += (normX * 22 - perspRotY.current) * 0.04;
+      perspRotX.current += ((normY - 0.5) * -14 - perspRotX.current) * 0.04;
+      if (svgRef.current) {
+        svgRef.current.style.transform =
+          `perspective(900px) rotateY(${perspRotY.current}deg) rotateX(${perspRotX.current}deg)`;
+      }
+
       g.setAttribute(
         "transform",
         `translate(${pt.x}, ${pt.y}) rotate(${spin.current + rotZCur.current})`
       );
+
+      // Update card opacities directly (no re-render)
+      if (cardsRef?.current) {
+        T_WAYPOINTS.forEach((tw, i) => {
+          const el = cardsRef.current[i];
+          if (!el) return;
+          const dist = Math.abs(currentT.current - tw);
+          el.style.opacity = dist < CARD_THRESHOLD ? "1" : "0";
+        });
+      }
     };
 
     rafRef.current = requestAnimationFrame(tick);
@@ -95,15 +129,14 @@ export default function TimelineWithStar({ progressRef, sectionRef }) {
   }, []);
 
   return (
-    <div className="flex justify-center w-full" style={{ width: "100%", height: "100%", position: "relative" }}>
+    <div className="flex justify-center w-full" style={{ width: "100%", height: "100vh", position: "relative", paddingTop: "4rem", paddingBottom: "4rem", boxSizing: "border-box" }}>
       <svg
-        width="100%"
-        height="100%"
+        ref={svgRef}
         viewBox={`0 0 ${VB_W} ${VB_H}`}
-        preserveAspectRatio="xMinYMid meet"
+        preserveAspectRatio="xMidYMid meet"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        style={{ display: "block", height: "100%" }}
+        style={{ display: "block", height: "100%", width: "auto", overflow: "visible" }}
       >
         {/* Timeline strokes */}
         <path d="M338.5 91.0366L35.5 837.037L575.5 1722.54L319 2588.54" stroke="white" strokeWidth="30"/>

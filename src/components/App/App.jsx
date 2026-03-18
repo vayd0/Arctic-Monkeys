@@ -5,10 +5,14 @@ import "./App.css";
 import Loader from "../Loader";
 import Intro from "../Intro";
 import Group from "../Group";
-import TimelineWithStar from "../TimelineWithStar";
+import TimelineWithStar, { TIMELINE_ITEMS } from "../TimelineWithStar";
 import ThreeModel from "../ThreeModel";
+import CustomCursor from "../CustomCursor";
+import Clips from "../Clips";
+import Footer from "../Footer";
 
 gsap.registerPlugin(ScrollTrigger);
+
 
 function App() {
   const [showLoader, setShowLoader] = useState(true);
@@ -16,6 +20,7 @@ function App() {
   const svgCentralRef = useRef(null);
   const progressRef = useRef(0);
   const timelineSectionRef = useRef(null);
+  const timelineCardsRef = useRef([]);
 
   const borderTopRef = useRef(null);
   const borderTopRightRef = useRef(null);
@@ -49,23 +54,76 @@ function App() {
         trigger: section,
         start: "top top",
         end: "+=80%",
-        scrub: 1,
+        scrub: 1.4,
       };
 
-      gsap.set(borderTopRef.current, { transformOrigin: "top left" });
-      gsap.set(borderTopRightRef.current, { transformOrigin: "top right" });
-      gsap.set(borderBottomLeftRef.current, { transformOrigin: "bottom left" });
-      gsap.set(borderBottomRightRef.current, { transformOrigin: "bottom right" });
-      gsap.set(borderHexRef.current, { transformOrigin: "center center" });
+      // Couche LOINTAINE — recule fortement
+      gsap.set(borderTopRef.current, { transformOrigin: "top left", force3D: true });
+      gsap.to(borderTopRef.current, {
+        y: -320, scale: 0.25, skewX: -14, rotateX: 28, opacity: 0.2,
+        ease: "none", scrollTrigger: st,
+      });
 
-      gsap.to(borderTopRef.current, { scale: 0.55, skewX: -4, ease: "none", scrollTrigger: st });
-      gsap.to(borderTopRightRef.current, { scale: 0.5, rotate: 10, ease: "none", scrollTrigger: st });
-      gsap.to(borderBottomLeftRef.current, { scale: 1.45, skewY: 4, ease: "none", scrollTrigger: st });
-      gsap.to(borderBottomRightRef.current, { scale: 1.45, skewY: -4, ease: "none", scrollTrigger: st });
-      gsap.to(borderHexRef.current, { rotate: 45, scale: 1.5, ease: "none", scrollTrigger: st });
+      // Couche LOINTAINE droite
+      gsap.set(borderTopRightRef.current, { transformOrigin: "top right", force3D: true });
+      gsap.to(borderTopRightRef.current, {
+        y: -260, x: 120, scale: 0.2, rotate: 40, rotateY: -25, opacity: 0.15,
+        ease: "none", scrollTrigger: st,
+      });
+
+      // Couche MOYENNE
+      gsap.set(borderBottomLeftRef.current, { transformOrigin: "bottom left", force3D: true });
+      gsap.to(borderBottomLeftRef.current, {
+        y: 180, x: -60, scale: 1.8, skewY: 10, rotateX: -12,
+        ease: "none", scrollTrigger: st,
+      });
+
+      gsap.set(borderBottomRightRef.current, { transformOrigin: "bottom right", force3D: true });
+      gsap.to(borderBottomRightRef.current, {
+        y: 200, x: 60, scale: 1.8, skewY: -10, rotateY: 18,
+        ease: "none", scrollTrigger: st,
+      });
+
+      // Couche PROCHE — fonce vers l'avant
+      gsap.set(borderHexRef.current, { transformOrigin: "center center", force3D: true });
+      gsap.to(borderHexRef.current, {
+        y: 420, x: -100, rotate: 160, scale: 3.5, rotateX: -35,
+        ease: "none", scrollTrigger: st,
+      });
     });
 
-    return () => ctx.revert();
+    // Mouse parallax multi-couches
+    const layers = [
+      { ref: borderTopRef,         depth: 0.008 },
+      { ref: borderTopRightRef,    depth: 0.014 },
+      { ref: borderBottomLeftRef,  depth: 0.022 },
+      { ref: borderBottomRightRef, depth: 0.026 },
+      { ref: borderHexRef,         depth: 0.055 },
+    ];
+
+    const handleMouseParallax = (e) => {
+      const rect = section.getBoundingClientRect();
+      const cx = (e.clientX - rect.left - rect.width  / 2);
+      const cy = (e.clientY - rect.top  - rect.height / 2);
+      layers.forEach(({ ref, depth }) => {
+        if (!ref.current) return;
+        gsap.to(ref.current, {
+          xPercent: 0,
+          yPercent: 0,
+          x: cx * depth * 60,
+          y: cy * depth * 60,
+          duration: 1.6,
+          ease: "power3.out",
+          overwrite: "auto",
+        });
+      });
+    };
+
+    section.addEventListener("mousemove", handleMouseParallax);
+    return () => {
+      ctx.revert();
+      section.removeEventListener("mousemove", handleMouseParallax);
+    };
   }, [contentVisible]);
 
   const handleLoaderEnd = () => setShowLoader(false);
@@ -76,6 +134,16 @@ function App() {
 
   return (
     <>
+      <CustomCursor />
+      <div style={{ position: "fixed", inset: 0, zIndex: 9998, pointerEvents: "none" }}>
+        <svg width="100%" height="100%" style={{ position: "absolute", inset: 0 }}>
+          <filter id="grain">
+            <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
+            <feColorMatrix type="saturate" values="0"/>
+          </filter>
+          <rect width="100%" height="100%" filter="url(#grain)" opacity="0.04"/>
+        </svg>
+      </div>
       {showLoader ? (
         <Loader duration={2000} size={64} onEnd={handleLoaderEnd} />
       ) : (
@@ -118,6 +186,8 @@ function App() {
           </section>
 
           <section className="h-screen w-screen mx-auto bg-black relative overflow-hidden flex items-center justify-center">
+            <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "12vw", background: "linear-gradient(to right, #000, transparent)", zIndex: 10, pointerEvents: "none" }} />
+            <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: "12vw", background: "linear-gradient(to left, #000, transparent)", zIndex: 10, pointerEvents: "none" }} />
             {Array.from({ length: 5 }).map((_, row) => (
               <div key={row} className="absolute flex" style={{ top: `${row * 20}%`, height: "20%", width: "max-content", animation: `slideRow ${12 + row * 3}s linear infinite ${row % 2 === 0 ? "normal" : "reverse"}` }}>
                 {[0, 1, 2].map((repeat) =>
@@ -131,26 +201,88 @@ function App() {
             ))}
           </section>
 
+          <Clips />
+
           <div ref={timelineSectionRef} style={{ position: "relative", background: "#000", height: "500vh" }}>
             <div
+              className="timeline-grid"
               style={{
                 position: "sticky",
                 top: 0,
                 height: "100vh",
                 display: "grid",
-                gridTemplateColumns: "50vw 50vw",
+                overflow: "visible",
               }}
             >
-              <div style={{ width: "100%", height: "100%" }}>
+              <div className="timeline-model" style={{ width: "100%", height: "100%", filter: "invert(1)" }}>
                 <ThreeModel progressRef={progressRef} />
               </div>
 
-              <div className="flex justify-center w-full" style={{ position: "relative", height: "100%", overflow: "hidden" }}>
-                <TimelineWithStar progressRef={progressRef} sectionRef={timelineSectionRef} />
+              <div className="flex justify-center w-full" style={{ position: "relative", height: "100%" }}>
+                <TimelineWithStar progressRef={progressRef} sectionRef={timelineSectionRef} cardsRef={timelineCardsRef} />
               </div>
+
+
+              {TIMELINE_ITEMS.map((item, i) => (
+                <div
+                  key={item.id}
+                  ref={el => timelineCardsRef.current[i] = el}
+                  className="timeline-card"
+                >
+                  {/* Year block */}
+                  <div style={{ display: "flex", flexDirection: "column", justifyContent: "flex-end", flexShrink: 0 }}>
+                    <span className="orbitron" style={{
+                      fontSize: "clamp(0.6rem, 0.8vw, 0.75rem)",
+                      letterSpacing: "0.3em",
+                      color: "rgba(255,255,255,0.4)",
+                      textTransform: "uppercase",
+                      marginBottom: "0.4rem",
+                    }}>Album</span>
+                    <span className="stretched" style={{
+                      fontSize: "clamp(3rem, 5vw, 4.5rem)",
+                      fontWeight: 900,
+                      color: "white",
+                      lineHeight: 1,
+                      letterSpacing: "-0.02em",
+                    }}>{item.year}</span>
+                  </div>
+
+                  {/* Divider */}
+                  <div className="timeline-card-divider" style={{ width: "1px", background: "rgba(255,255,255,0.2)", flexShrink: 0, alignSelf: "stretch" }} />
+
+                  {/* Title + body */}
+                  <div style={{ display: "flex", flexDirection: "column", justifyContent: "flex-end", flex: 1, maxWidth: "clamp(260px, 40vw, 520px)" }}>
+                    <h3 className="orbitron" style={{
+                      fontSize: "clamp(0.75rem, 1vw, 0.95rem)",
+                      fontWeight: 700,
+                      letterSpacing: "0.12em",
+                      textTransform: "uppercase",
+                      color: "white",
+                      marginBottom: "0.6rem",
+                    }}>{item.title}</h3>
+                    <p style={{
+                      fontSize: "clamp(0.7rem, 0.85vw, 0.85rem)",
+                      lineHeight: 1.75,
+                      color: "rgba(255,255,255,0.55)",
+                      fontWeight: 300,
+                      margin: 0,
+                    }}>{item.body}</p>
+                  </div>
+
+                  {/* Index */}
+                  <div style={{ marginLeft: "auto", display: "flex", alignItems: "flex-end", flexShrink: 0 }}>
+                    <span className="orbitron" style={{
+                      fontSize: "clamp(0.6rem, 0.75vw, 0.7rem)",
+                      color: "rgba(255,255,255,0.2)",
+                      letterSpacing: "0.2em",
+                    }}>0{i + 1} / 03</span>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
+          <Footer />
         </div>
       )}
     </>

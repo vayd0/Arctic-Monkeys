@@ -189,7 +189,7 @@ function Menu() {
             className="absolute right-[7rem] bottom-[6rem] text-start text-[5vw] md:text-[2.5rem]"
             style={{ opacity: 1 }}
           >
-            <h1 className="stretched text-black">ARCTIC <br/>MOONKEYS</h1>
+            <h1 className="stretched text-black">ARCTIC <br/>MONKEYS</h1>
           </section>
         </div>
       </div>
