@@ -10,6 +10,7 @@ import ThreeModel from "../ThreeModel";
 import CustomCursor from "../CustomCursor";
 import Clips from "../Clips";
 import Footer from "../Footer";
+import Border3D from '../Border3D';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -58,7 +59,7 @@ function App() {
       };
 
       // Couche LOINTAINE — recule fortement
-      gsap.set(borderTopRef.current, { transformOrigin: "top left", force3D: true });
+      gsap.set(borderTopRef.current, { transformOrigin: "top left", force3D: true, rotate: -4 });
       gsap.to(borderTopRef.current, {
         y: -320, scale: 0.25, skewX: -14, rotateX: 28, opacity: 0.2,
         ease: "none", scrollTrigger: st,
@@ -105,6 +106,7 @@ function App() {
 
   return (
     <>
+      <Border3D />
       <CustomCursor />
       <div style={{ position: "fixed", inset: 0, zIndex: 9998, pointerEvents: "none" }}>
         <svg width="100%" height="100%" style={{ position: "absolute", inset: 0 }}>
@@ -132,7 +134,7 @@ function App() {
             style={{ perspective: "800px" }}
           >
             {/* Trapèze — faisceau de lumière top */}
-            <svg ref={borderTopRef} width="1902" height="375" viewBox="0 0 1902 375" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute top-[-10rem] left-[-10rem] will-change-transform" style={{ transform: "rotate(-8deg)" }} id="border">
+            <svg ref={borderTopRef} width="1902" height="375" viewBox="0 0 1902 375" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute top-[-10rem] left-[-10rem] will-change-transform" id="border">
               <path d="M 0,375 L 220,0 L 1902,0 L 1682,375 Z" fill="white"/>
             </svg>
 
