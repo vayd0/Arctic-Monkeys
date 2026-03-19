@@ -23,12 +23,6 @@ function App() {
   const timelineSectionRef = useRef(null);
   const timelineCardsRef = useRef([]);
 
-  const borderTopRef = useRef(null);
-  const borderTopRightRef = useRef(null);
-  const borderBottomLeftRef = useRef(null);
-  const borderBottomRightRef = useRef(null);
-  const borderHexRef = useRef(null);
-  const sectionRef = useRef(null);
 
   useEffect(() => {
     const section = document.querySelector(".bg-white.relative");
@@ -45,58 +39,6 @@ function App() {
     return () => section.removeEventListener("mousemove", handleMove);
   }, [contentVisible]);
 
-  useEffect(() => {
-    if (!contentVisible) return;
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const ctx = gsap.context(() => {
-      const st = {
-        trigger: section,
-        start: "top top",
-        end: "+=80%",
-        scrub: 1.4,
-      };
-
-      // Couche LOINTAINE — recule fortement
-      gsap.set(borderTopRef.current, { transformOrigin: "top left", force3D: true, rotate: -4 });
-      gsap.to(borderTopRef.current, {
-        y: -320, scale: 0.25, skewX: -14, rotateX: 28, opacity: 0.2,
-        ease: "none", scrollTrigger: st,
-      });
-
-      // Couche LOINTAINE droite
-      gsap.set(borderTopRightRef.current, { transformOrigin: "top right", force3D: true });
-      gsap.to(borderTopRightRef.current, {
-        y: -260, x: 120, scale: 0.2, rotate: 40, rotateY: -25, opacity: 0.15,
-        ease: "none", scrollTrigger: st,
-      });
-
-      // Couche MOYENNE
-      gsap.set(borderBottomLeftRef.current, { transformOrigin: "bottom left", force3D: true });
-      gsap.to(borderBottomLeftRef.current, {
-        y: 180, x: -60, scale: 1.8, skewY: 10, rotateX: -12,
-        ease: "none", scrollTrigger: st,
-      });
-
-      gsap.set(borderBottomRightRef.current, { transformOrigin: "bottom right", force3D: true });
-      gsap.to(borderBottomRightRef.current, {
-        y: 200, x: 60, scale: 1.8, skewY: -10, rotateY: 18,
-        ease: "none", scrollTrigger: st,
-      });
-
-      // Couche PROCHE — fonce vers l'avant
-      gsap.set(borderHexRef.current, { transformOrigin: "center center", force3D: true });
-      gsap.to(borderHexRef.current, {
-        y: 420, x: -100, rotate: 160, scale: 3.5, rotateX: -35,
-        ease: "none", scrollTrigger: st,
-      });
-    });
-
-    return () => {
-      ctx.revert();
-    };
-  }, [contentVisible]);
 
   const handleLoaderEnd = () => setShowLoader(false);
 
@@ -128,42 +70,7 @@ function App() {
         >
           <Intro />
 
-          <section
-            ref={sectionRef}
-            className="top-0 left-0 z-999999 relative h-screen overflow-hidden"
-            style={{ perspective: "800px" }}
-          >
-            {/* Trapèze — faisceau de lumière top */}
-            <svg ref={borderTopRef} width="1902" height="375" viewBox="0 0 1902 375" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute top-[-10rem] left-[-10rem] will-change-transform" id="border">
-              <path d="M 0,375 L 220,0 L 1902,0 L 1682,375 Z" fill="white"/>
-            </svg>
-
-            {/* Diamants concentriques wireframe */}
-            <svg ref={borderTopRightRef} className="absolute top-[-14rem] right-[-20rem] rotate-[20deg] hidden md:block will-change-transform" width="1000" height="898" viewBox="0 0 1457 898" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ transform: "scaleY(-1) scaleX(-1)" }}>
-              <path d="M728,20 L1437,449 L728,878 L19,449 Z" fill="none" stroke="white" strokeWidth="3"/>
-              <path d="M728,160 L1297,449 L728,738 L159,449 Z" fill="none" stroke="white" strokeWidth="1.5" opacity="0.5"/>
-              <path d="M728,320 L877,449 L728,578 L579,449 Z" fill="white"/>
-            </svg>
-
-            <div className="mt-7">
-              <Group svgCentralRef={svgCentralRef} />
-              <div className="relative md:z-[100]">
-                {/* Frame gauche — bord de scène */}
-                <svg ref={borderBottomLeftRef} className="absolute -left-15 bottom-0 md:left-0 will-change-transform" width="1439" height="980" viewBox="0 0 1439 980" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M1186.5 901.5L320.5 877.5L138 716.5L208 58L6.5 0H-26L-37 1009H1439L1357.5 972L1186.5 901.5Z" fill="white"/>
-                </svg>
-                {/* Shard droite */}
-                <svg ref={borderBottomRightRef} className="absolute -right-15 bottom-0 md:right-0 will-change-transform" width="388" height="982" viewBox="0 0 388 982" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M338 730.5L0 934.5L34.5 1025L402 1052L441.5 -64.5L182.5 11.5L305 161.5L338 730.5Z" fill="white"/>
-                </svg>
-              </div>
-            </div>
-
-            {/* Étoile 4 branches — accent foreground */}
-            <svg ref={borderHexRef} className="absolute bottom-30 right-40 z-[1000] hidden md:block will-change-transform" width="200" height="200" viewBox="0 0 664 664" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M 332,36 L 379,285 L 628,332 L 379,379 L 332,628 L 285,379 L 36,332 L 285,285 Z" fill="white"/>
-            </svg>
-          </section>
+          <Group svgCentralRef={svgCentralRef} />
 
           <section className="h-screen w-screen mx-auto bg-black relative overflow-hidden flex items-center justify-center">
             <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "12vw", background: "linear-gradient(to right, #000, transparent)", zIndex: 10, pointerEvents: "none" }} />
