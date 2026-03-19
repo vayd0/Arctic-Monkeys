@@ -7,6 +7,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
+const BORDER_THICKNESS = 20
+const BORDER_RADIUS = 36
+
 function buildBorderShape(w, h, thickness, radius) {
   const ow = w / 2, oh = h / 2
   const iw = ow - thickness, ih = oh - thickness
@@ -38,16 +41,18 @@ function buildBorderShape(w, h, thickness, radius) {
 function BorderMesh() {
   const { size } = useThree()
   const meshRef = useRef(null)
+  const geoRef = useRef(null)
   const [geometry, setGeometry] = useState(null)
 
   // Rebuild geometry on resize, dispose old one
   useEffect(() => {
-    const geo = buildBorderShape(size.width, size.height, 20, 36)
+    geoRef.current?.dispose()
+    const geo = buildBorderShape(size.width, size.height, BORDER_THICKNESS, BORDER_RADIUS)
+    geoRef.current = geo
     setGeometry(geo)
-    return () => geo.dispose()
   }, [size.width, size.height])
 
-  // Scroll animation — runs once on mount
+  // Scroll animation — re-runs when geometry becomes available
   useEffect(() => {
     const mesh = meshRef.current
     if (!mesh) return
@@ -66,14 +71,14 @@ function BorderMesh() {
     })
 
     return () => trigger.kill()
-  }, [])
+  }, [geometry])
 
   if (!geometry) return null
 
   return (
     <mesh ref={meshRef}>
       <primitive object={geometry} attach="geometry" />
-      <meshBasicMaterial color="#ffffff" side={THREE.DoubleSide} />
+      <meshBasicMaterial color="#ffffff" side={THREE.FrontSide} />
     </mesh>
   )
 }
@@ -82,6 +87,7 @@ export default function Border3D() {
   return (
     <Canvas
       orthographic
+      // zoom:1 → 1 CSS pixel = 1 Three.js unit, so geometry can be built in pixel dimensions
       camera={{ zoom: 1, near: 0.1, far: 1000, position: [0, 0, 100] }}
       style={{
         position: 'fixed',
