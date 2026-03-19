@@ -92,37 +92,8 @@ function App() {
       });
     });
 
-    // Mouse parallax multi-couches
-    const layers = [
-      { ref: borderTopRef,         depth: 0.008 },
-      { ref: borderTopRightRef,    depth: 0.014 },
-      { ref: borderBottomLeftRef,  depth: 0.022 },
-      { ref: borderBottomRightRef, depth: 0.026 },
-      { ref: borderHexRef,         depth: 0.055 },
-    ];
-
-    const handleMouseParallax = (e) => {
-      const rect = section.getBoundingClientRect();
-      const cx = (e.clientX - rect.left - rect.width  / 2);
-      const cy = (e.clientY - rect.top  - rect.height / 2);
-      layers.forEach(({ ref, depth }) => {
-        if (!ref.current) return;
-        gsap.to(ref.current, {
-          xPercent: 0,
-          yPercent: 0,
-          x: cx * depth * 60,
-          y: cy * depth * 60,
-          duration: 1.6,
-          ease: "power3.out",
-          overwrite: "auto",
-        });
-      });
-    };
-
-    section.addEventListener("mousemove", handleMouseParallax);
     return () => {
       ctx.revert();
-      section.removeEventListener("mousemove", handleMouseParallax);
     };
   }, [contentVisible]);
 
@@ -160,28 +131,35 @@ function App() {
             className="top-0 left-0 z-999999 relative h-screen overflow-hidden"
             style={{ perspective: "800px" }}
           >
-            <svg ref={borderTopRef} width="1902" height="375" viewBox="0 0 1902 375" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute top-[-10rem] left-[-10rem] will-change-transform" id="border">
-              <path d="M260.281 335.467L398.281 262.467L1236.78 185.467L1781.28 335.467L1859.78 108.569L57.7812 32.4668L260.281 335.467Z" fill="white" stroke="white" strokeWidth="60"/>
+            {/* Trapèze — faisceau de lumière top */}
+            <svg ref={borderTopRef} width="1902" height="375" viewBox="0 0 1902 375" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute top-[-10rem] left-[-10rem] will-change-transform" style={{ transform: "rotate(-8deg)" }} id="border">
+              <path d="M 0,375 L 220,0 L 1902,0 L 1682,375 Z" fill="white"/>
             </svg>
 
+            {/* Diamants concentriques wireframe */}
             <svg ref={borderTopRightRef} className="absolute top-[-14rem] right-[-20rem] rotate-[20deg] hidden md:block will-change-transform" width="1000" height="898" viewBox="0 0 1457 898" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ transform: "scaleY(-1) scaleX(-1)" }}>
-              <path d="M2.87878 559.381L264.879 766.381L323.379 896.881L1311.38 711.881L1578.38 383.881H1258.38L1311.38 1.88086L819.379 283.881L478.379 29.3809V383.881L126.879 246.381L305.879 559.381H2.87878Z" fill="white" stroke="white" strokeWidth="2"/>
+              <path d="M728,20 L1437,449 L728,878 L19,449 Z" fill="none" stroke="white" strokeWidth="3"/>
+              <path d="M728,160 L1297,449 L728,738 L159,449 Z" fill="none" stroke="white" strokeWidth="1.5" opacity="0.5"/>
+              <path d="M728,320 L877,449 L728,578 L579,449 Z" fill="white"/>
             </svg>
 
             <div className="mt-7">
               <Group svgCentralRef={svgCentralRef} />
               <div className="relative md:z-[100]">
+                {/* Frame gauche — bord de scène */}
                 <svg ref={borderBottomLeftRef} className="absolute -left-15 bottom-0 md:left-0 will-change-transform" width="1439" height="980" viewBox="0 0 1439 980" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1186.5 901.5L320.5 877.5L138 716.5L208 58L6.5 0H-26L-37 1009H1439L1357.5 972L1186.5 901.5Z" fill="white"/>
                 </svg>
+                {/* Shard droite */}
                 <svg ref={borderBottomRightRef} className="absolute -right-15 bottom-0 md:right-0 will-change-transform" width="388" height="982" viewBox="0 0 388 982" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M338 730.5L0 934.5L34.5 1025L402 1052L441.5 -64.5L182.5 11.5L305 161.5L338 730.5Z" fill="white"/>
                 </svg>
               </div>
             </div>
 
-            <svg ref={borderHexRef} className="absolute bottom-30 right-40 z-[1000] hidden md:block will-change-transform" width="200" height="200" viewBox="0 0 665 665" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M123.999 398.633L191.968 421.595L209.42 341.685L182.783 257.182L209.42 214.931L571.312 90.0139L502.424 241.568L551.105 467.521L484.972 530.898L394.959 509.772L371.996 421.595L418.84 372.914H484.972L447.314 241.568H387.61L249.834 295.76V390.366L261.775 523.55L200.235 596.112L91.8508 585.09L48.6809 475.787L123.999 398.633Z" fill="white"/>
+            {/* Étoile 4 branches — accent foreground */}
+            <svg ref={borderHexRef} className="absolute bottom-30 right-40 z-[1000] hidden md:block will-change-transform" width="200" height="200" viewBox="0 0 664 664" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 332,36 L 379,285 L 628,332 L 379,379 L 332,628 L 285,379 L 36,332 L 285,285 Z" fill="white"/>
             </svg>
           </section>
 
@@ -203,7 +181,7 @@ function App() {
 
           <Clips />
 
-          <div ref={timelineSectionRef} style={{ position: "relative", background: "#000", height: "500vh" }}>
+          <div ref={timelineSectionRef} style={{ position: "relative", background: "#000", height: "500vh", paddingBottom: "5rem" }}>
             <div
               className="timeline-grid"
               style={{

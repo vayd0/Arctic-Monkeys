@@ -2,7 +2,7 @@ import "./Footer.css";
 
 export default function Footer() {
   return (
-    <footer style={{ position: "relative", background: "white", paddingTop: "6rem", paddingBottom: "3rem" }}>
+    <footer style={{ position: "relative", background: "white", paddingTop: "11rem", paddingBottom: "3rem" }}>
       {/* Wave transition black → white */}
       <svg
         viewBox="0 0 1512 250"
