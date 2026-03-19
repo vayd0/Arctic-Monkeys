@@ -1,5 +1,4 @@
-import { useState } from "react";
-import Border from "../Border";
+import Menu from "../Menu";
 import Video from "../Video";
 import TextBlock from "../TextBlock";
 import Dither from "../Dither";
@@ -31,7 +30,7 @@ function Intro() {
           </article>
         </section>
         <div className="absolute top-0 left-0">
-          <Border />
+          <Menu />
         </div>
       </div>
     </>

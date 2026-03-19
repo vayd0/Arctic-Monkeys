@@ -1,6 +1,3 @@
-import { useState } from "react";
-import Border from "../Border";
-import Video from "../Video";
 function TextBlock({ content, contrast = 0.8, color = "white", padding = "0.5rem 1rem" }) {
   const invert = contrast;
   const bgOpacity = 0.1 + 0.4 * contrast;
