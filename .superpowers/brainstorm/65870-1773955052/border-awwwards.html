@@ -1,0 +1,83 @@
+<style>
+  .preview { background:#000; width:100%; height:220px; position:relative; overflow:hidden; }
+  .preview svg { position:absolute; inset:0; width:100%; height:100%; }
+  .preview .label { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,0.2); font-size:0.5rem; letter-spacing:0.3em; font-family:monospace; text-transform:uppercase; }
+</style>
+
+<h2>Arrondi — interface awwwards</h2>
+<p class="subtitle">Blanc pur, coins généreux, effet moderne premium</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="preview">
+        <svg viewBox="0 0 400 220">
+          <!-- Cadre avec très grands rayons, style "phone bezel" premium -->
+          <!-- Outer ring épais -->
+          <rect x="6" y="6" width="388" height="208" rx="32" ry="32" fill="none" stroke="#fff" stroke-width="12"/>
+          <!-- Inner ring fin -->
+          <rect x="22" y="22" width="356" height="176" rx="20" ry="20" fill="none" stroke="#fff" stroke-width="1.2"/>
+          <!-- Notch subtil top centre -->
+          <rect x="160" y="6" width="80" height="12" rx="0" fill="#000"/>
+          <rect x="168" y="6" width="64" height="10" rx="5" fill="#fff"/>
+        </svg>
+        <div class="label">Arctic Monkeys</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Phone bezel premium</h3>
+      <p>Double anneau radius 32px, trait épais extérieur + fin intérieur. Notch centré top. Style device Apple/Nothing — familier mais élégant. En 3D, tourne comme un vrai bezel.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="preview" style="perspective:600px;">
+        <svg viewBox="0 0 400 220" style="transform:rotateX(14deg) rotateY(-6deg);">
+          <!-- Cadre unique radius moyen, stroke très épais — style Framer/Linear -->
+          <rect x="8" y="8" width="384" height="204" rx="24" ry="24" fill="none" stroke="#fff" stroke-width="16"/>
+          <!-- Coins : petits carrés d'accent dans les coins arrondis -->
+          <rect x="8" y="8" width="36" height="36" rx="24" fill="#fff"/>
+          <rect x="356" y="8" width="36" height="36" rx="24" fill="#fff"/>
+          <rect x="8" y="176" width="36" height="36" rx="24" fill="#fff"/>
+          <rect x="356" y="176" width="36" height="36" rx="24" fill="#fff"/>
+        </svg>
+        <div class="label">Arctic Monkeys</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Stroke épais + coins pleins</h3>
+      <p>Cadre 16px stroke avec coins radius remplis en blanc. Très impactant, style UI card premium de 2024/2025. En 3D incliné, les coins pleins créent des points d'ancrage visuels forts.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="preview">
+        <svg viewBox="0 0 400 220">
+          <!-- Style awwwards : que les coins arrondis, bords ouverts, très moderne -->
+          <!-- Coin TL -->
+          <path d="M80,8 L28,8 Q8,8 8,28 L8,80" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="square"/>
+          <!-- Coin TR -->
+          <path d="M320,8 L372,8 Q392,8 392,28 L392,80" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="square"/>
+          <!-- Coin BL -->
+          <path d="M80,212 L28,212 Q8,212 8,192 L8,140" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="square"/>
+          <!-- Coin BR -->
+          <path d="M320,212 L372,212 Q392,212 392,192 L392,140" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="square"/>
+          <!-- Petites marques milieu des bords -->
+          <line x1="190" y1="8" x2="210" y2="8" stroke="#fff" stroke-width="3" stroke-linecap="square"/>
+          <line x1="190" y1="212" x2="210" y2="212" stroke="#fff" stroke-width="3" stroke-linecap="square"/>
+          <line x1="8" y1="105" x2="8" y2="115" stroke="#fff" stroke-width="3" stroke-linecap="square"/>
+          <line x1="392" y1="105" x2="392" y2="115" stroke="#fff" stroke-width="3" stroke-linecap="square"/>
+        </svg>
+        <div class="label">Arctic Monkeys</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Coins ouverts style UI 2025</h3>
+      <p>Que les 4 coins arrondis, bords laissés ouverts. Très populaire sur awwwards en ce moment — minimaliste mais sophistiqué. Chaque coin = mesh R3F indépendant, rotations différentes au scroll.</p>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,66 @@
+<h2>Bordure déformée — blanc pur</h2>
+<p class="subtitle">Formes brutes, blanc 100%, fond noir</p>
+
+<div class="cards">
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#000;width:100%;height:200px;position:relative;overflow:hidden;">
+        <svg width="100%" height="100%" viewBox="0 0 400 200" style="position:absolute;inset:0;">
+          <polygon points="0,0 90,0 45,38 0,65" fill="#fff"/>
+          <polygon points="400,0 310,0 355,42 400,22" fill="#fff"/>
+          <polygon points="0,200 70,200 35,162 0,145" fill="#fff"/>
+          <polygon points="400,200 330,200 365,158 400,172" fill="#fff"/>
+          <polygon points="-5,0 405,0 395,16 55,10 18,20" fill="#fff"/>
+          <polygon points="-5,200 405,200 388,184 48,190 8,180" fill="#fff"/>
+          <polygon points="0,0 20,0 24,200 0,200" fill="#fff"/>
+          <polygon points="400,0 380,0 376,200 400,200" fill="#fff"/>
+        </svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Shards</h3>
+      <p>Éclats blancs irréguliers aux 4 bords. Chaque shard = un mesh R3F indépendant qui pivote au scroll.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#000;width:100%;height:200px;position:relative;overflow:hidden;perspective:400px;">
+        <svg width="100%" height="100%" viewBox="0 0 400 200" style="position:absolute;inset:0;transform:rotateX(18deg) rotateY(-8deg) skewX(-2deg);">
+          <path d="M0,0 L405,0 L405,14 L370,9 L195,17 L38,7 L0,20 Z" fill="#fff"/>
+          <path d="M0,200 L405,200 L405,186 L345,192 L175,184 L55,193 L0,185 Z" fill="#fff"/>
+          <path d="M0,0 L0,200 L16,197 L9,100 L18,0 Z" fill="#fff"/>
+          <path d="M405,0 L405,200 L389,196 L395,96 L387,0 Z" fill="#fff"/>
+          <path d="M0,0 L65,0 L42,38 L0,52 Z" fill="#fff"/>
+          <path d="M405,0 L340,0 L358,42 L405,58 Z" fill="#fff"/>
+        </svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Masse brute</h3>
+      <p>Une seule forme monolithique asymétrique qui se tord en rotateX/Y/skew au scroll. Un mesh unique.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#000;width:100%;height:200px;position:relative;overflow:hidden;">
+        <svg width="100%" height="100%" viewBox="0 0 400 200" style="position:absolute;inset:0;">
+          <rect x="-5" y="0" width="410" height="9" fill="#fff" transform="skewX(-5)"/>
+          <rect x="-5" y="11" width="220" height="4" fill="#fff" transform="skewX(9) translate(70,0)"/>
+          <rect x="-5" y="17" width="410" height="6" fill="#fff" transform="skewX(3)"/>
+          <rect x="-5" y="187" width="410" height="9" fill="#fff" transform="skewX(5)"/>
+          <rect x="-5" y="179" width="190" height="4" fill="#fff" transform="skewX(-7) translate(110,0)"/>
+          <rect x="0" y="0" width="8" height="200" fill="#fff" transform="skewY(-4)"/>
+          <rect x="9" y="55" width="4" height="90" fill="#fff" transform="skewY(6)"/>
+          <rect x="392" y="0" width="8" height="200" fill="#fff" transform="skewY(4)"/>
+          <rect x="388" y="35" width="4" height="110" fill="#fff" transform="skewY(-5)"/>
+        </svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Glitch bandes</h3>
+      <p>Bandes multiples décalées et skewées. En 3D, chaque bande a sa propre profondeur z et se désaligne au scroll.</p>
+    </div>
+  </div>
+</div>

@@ -30,9 +30,9 @@ export const T_WAYPOINTS = [
 ];
 
 export const TIMELINE_ITEMS = [
-  { id: 1, year: "2006", title: "Whatever People Say I Am, That's What I'm Not", body: "Debut album. Recorded in Sheffield for £10k, it became the fastest-selling debut in UK chart history — raw, urgent, and completely alive." },
-  { id: 2, year: "2009", title: "Humbug", body: "Produced with Josh Homme in the California desert. A dark, psychedelic pivot that proved the band were done playing it safe." },
-  { id: 3, year: "2013", title: "AM", body: "Their fifth album and global breakthrough. Stoner-rock riffs, R&B influence, and Turner's most cinematic lyricism — a modern classic." },
+  { id: 1, year: "2006", title: "Whatever People Say I Am, That's What I'm Not", body: "Premier album. Enregistré à Sheffield pour £10k, il est devenu le premier album le plus vendu de l'histoire des charts britanniques — brut, urgent et totalement vivant." },
+  { id: 2, year: "2009", title: "Humbug", body: "Produit avec Josh Homme dans le désert californien. Un virage sombre et psychédélique qui prouvait que le groupe ne jouerait plus la sécurité." },
+  { id: 3, year: "2013", title: "AM", body: "Leur cinquième album et percée mondiale. Riffs stoner-rock, influences R&B et le lyrisme le plus cinématographique de Turner — un classique moderne." },
 ];
 
 function pointAt(t) {

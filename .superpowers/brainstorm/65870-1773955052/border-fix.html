@@ -1,0 +1,60 @@
+<style>
+  .preview { background:#111; width:100%; height:220px; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+  .preview svg { position:absolute; inset:0; width:100%; height:100%; }
+  .label { position:absolute; color:rgba(255,255,255,0.2); font-size:0.5rem; letter-spacing:0.3em; font-family:monospace; text-transform:uppercase; z-index:1; }
+</style>
+
+<h2>Extérieur carré — intérieur arrondi</h2>
+<p class="subtitle">Les coins du viewport sont 100% blancs, seul le trou est arrondi</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="preview">
+        <svg viewBox="0 0 400 220">
+          <rect x="0" y="0" width="400" height="220" fill="#fff"/>
+          <rect x="16" y="16" width="368" height="188" rx="28" fill="#111"/>
+        </svg>
+        <div class="label">Arctic Monkeys</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Épaisseur 16px, radius 28</h3>
+      <p>Extérieur carré plein, trou intérieur arrondi. Coins viewport 100% blancs. Finesse équilibrée.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="preview" style="perspective:700px;">
+        <svg viewBox="0 0 400 220" style="transform:rotateX(18deg) rotateY(-8deg)">
+          <rect x="0" y="0" width="400" height="220" fill="#fff"/>
+          <rect x="22" y="22" width="356" height="176" rx="40" fill="#111"/>
+        </svg>
+        <div class="label">Arctic Monkeys</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Épaisse + grand radius, en 3D</h3>
+      <p>22px d'épaisseur, radius 40 — plus imposant. Incliné en 3D pour voir l'effet final. Corners blancs quelle que soit la rotation.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="preview" style="perspective:700px;">
+        <svg viewBox="0 0 400 220" style="transform:rotateX(22deg) rotateY(-10deg)">
+          <rect x="0" y="0" width="400" height="220" fill="#fff"/>
+          <rect x="30" y="30" width="340" height="160" rx="52" fill="#111"/>
+        </svg>
+        <div class="label">Arctic Monkeys</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Très épais + radius XXL</h3>
+      <p>30px, radius 52 — presque une pilule. Très expressif en 3D, les coins blancs massifs ancrent visuellement la composition.</p>
+    </div>
+  </div>
+
+</div>

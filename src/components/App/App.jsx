@@ -6,7 +6,7 @@ import Loader from "../Loader";
 import Intro from "../Intro";
 import Group from "../Group";
 import TimelineWithStar, { TIMELINE_ITEMS } from "../TimelineWithStar";
-import ThreeModel from "../ThreeModel";
+import ThreeModel from "../Threemodel";
 import CustomCursor from "../CustomCursor";
 import Clips from "../Clips";
 import Footer from "../Footer";
@@ -70,7 +70,22 @@ function App() {
         >
           <Intro />
 
-          <Group svgCentralRef={svgCentralRef} />
+          <div style={{
+            position: "relative",
+            zIndex: 10,
+            margin: "-5rem 0",
+            display: "flex",
+            justifyContent: "center",
+            pointerEvents: "none",
+          }}>
+            <svg width="100%" viewBox="0 0 1507 435" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+              <path d="M102.532 355.295L-21 294.503V104.022L250.771 81.0559L446.522 64.8447L522.542 0L853.229 81.0559L1311.25 33.7733L1507 81.0559V368.804L1250.43 294.503L982.463 435L486.433 294.503L102.532 355.295Z" fill="white"/>
+            </svg>
+          </div>
+
+          <div id="discover">
+            <Group svgCentralRef={svgCentralRef} />
+          </div>
 
           <section className="h-screen w-screen mx-auto bg-black relative overflow-hidden flex items-center justify-center">
             <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "12vw", background: "linear-gradient(to right, #000, transparent)", zIndex: 10, pointerEvents: "none" }} />
@@ -88,7 +103,9 @@ function App() {
             ))}
           </section>
 
-          <Clips />
+          <div id="musics">
+            <Clips />
+          </div>
 
           <div ref={timelineSectionRef} style={{ position: "relative", background: "#000", height: "500vh", paddingBottom: "5rem" }}>
             <div

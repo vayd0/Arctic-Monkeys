@@ -1,0 +1,68 @@
+<style>
+  .preview { background:#000; width:100%; height:220px; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+  .preview svg { position:absolute; inset:0; width:100%; height:100%; }
+  .label { position:absolute; color:rgba(255,255,255,0.18); font-size:0.5rem; letter-spacing:0.3em; font-family:monospace; text-transform:uppercase; z-index:1; }
+</style>
+
+<h2>Shape + hole — coins 100% blancs</h2>
+<p class="subtitle">Extérieur arrondi, trou intérieur droit — comme THREE.Shape avec Path en R3F</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="preview">
+        <svg viewBox="0 0 400 220">
+          <!-- fill-rule evenodd : outer arrondi - inner droit -->
+          <path fill-rule="evenodd" fill="#fff" d="
+            M32,0 Q0,0 0,32 L0,188 Q0,220 32,220 L368,220 Q400,220 400,188 L400,32 Q400,0 368,0 Z
+            M18,16 L382,16 L382,204 L18,204 Z
+          "/>
+        </svg>
+        <div class="label">Arctic Monkeys</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Radius 32, épaisseur 16px</h3>
+      <p>Outer arrondi rx:32, inner droit. Les coins sont 100% blancs pleins. C'est exactement ce que THREE.Shape + addContour produit en R3F.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="preview" style="perspective:700px;">
+        <svg viewBox="0 0 400 220" style="transform:rotateX(18deg) rotateY(-8deg)">
+          <path fill-rule="evenodd" fill="#fff" d="
+            M44,0 Q0,0 0,44 L0,176 Q0,220 44,220 L356,220 Q400,220 400,176 L400,44 Q400,0 356,0 Z
+            M20,18 L380,18 L380,202 L20,202 Z
+          "/>
+        </svg>
+        <div class="label">Arctic Monkeys</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Radius 44, en 3D</h3>
+      <p>Plus imposant, déjà incliné en 3D pour voir l'effet. Coins pleins blancs quelle que soit l'inclinaison. C'est ce concept-là qu'on implémente en R3F.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="preview" style="perspective:700px;">
+        <svg viewBox="0 0 400 220" style="transform:rotateX(22deg) rotateY(-10deg)">
+          <!-- Épaisseur variable : plus épais en haut/bas, fin sur les côtés -->
+          <path fill-rule="evenodd" fill="#fff" d="
+            M44,0 Q0,0 0,44 L0,176 Q0,220 44,220 L356,220 Q400,220 400,176 L400,44 Q400,0 356,0 Z
+            M10,24 L390,24 L390,196 L10,196 Z
+          "/>
+        </svg>
+        <div class="label">Arctic Monkeys</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Épaisseur asymétrique 3D</h3>
+      <p>Le trou intérieur est décalé — les bords top/bottom sont plus épais que les côtés. Crée un cadre plus dramatique. Même technique, juste le Path intérieur est décentré.</p>
+    </div>
+  </div>
+
+</div>

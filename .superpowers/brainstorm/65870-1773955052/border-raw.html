@@ -1,0 +1,83 @@
+<h2>Bordure déformée — style brut</h2>
+<p class="subtitle">Des formes irrégulières en 3D, pas un cadre propre</p>
+
+<div class="cards">
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#111;width:100%;height:200px;position:relative;overflow:hidden;">
+        <svg width="100%" height="100%" viewBox="0 0 400 200" style="position:absolute;inset:0;">
+          <!-- shards déformés autour du viewport, style "brisé" -->
+          <polygon points="0,0 80,0 40,30 0,60" fill="white" opacity="0.9"/>
+          <polygon points="400,0 320,0 360,45 400,20" fill="white" opacity="0.9"/>
+          <polygon points="0,200 60,200 30,160 0,140" fill="white" opacity="0.9"/>
+          <polygon points="400,200 340,200 370,155 400,170" fill="white" opacity="0.9"/>
+          <!-- bandes top/bottom déformées -->
+          <polygon points="-10,0 410,0 390,18 60,12 20,22" fill="white" opacity="0.85"/>
+          <polygon points="-10,200 410,200 380,182 50,188 10,178" fill="white" opacity="0.85"/>
+          <!-- lignes latérales déformées -->
+          <polygon points="0,0 18,0 22,200 0,200" fill="white" opacity="0.8"/>
+          <polygon points="400,0 382,0 378,200 400,200" fill="white" opacity="0.8"/>
+        </svg>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <span style="color:rgba(255,255,255,0.3);font-size:0.55rem;letter-spacing:0.25em;font-family:monospace;">SITE CONTENT</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Shards irréguliers</h3>
+      <p>Des éclats blancs irréguliers aux 4 bords + coins, style fragments cassés. En 3D avec R3F, chaque shard est un mesh qui se tord et s'incline au scroll. Dans la continuité des formes actuelles du site.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#111;width:100%;height:200px;position:relative;overflow:hidden;perspective:300px;">
+        <svg width="100%" height="100%" viewBox="0 0 400 200" style="position:absolute;inset:0;transform:rotateX(20deg) rotateY(-10deg) skew(-3deg, 2deg);">
+          <!-- bordure monolithique déformée, pas symétrique -->
+          <path d="M0,0 L420,0 L420,12 L380,8 L200,15 L40,6 L0,18 Z" fill="white"/>
+          <path d="M0,200 L420,200 L420,185 L350,190 L180,182 L60,192 L0,184 Z" fill="white"/>
+          <path d="M0,0 L0,200 L14,196 L8,100 L16,0 Z" fill="white"/>
+          <path d="M420,0 L420,200 L406,195 L412,95 L404,0 Z" fill="white"/>
+          <!-- détails bruts coins -->
+          <path d="M0,0 L60,0 L40,35 L0,50 Z" fill="white" opacity="0.6"/>
+          <path d="M420,0 L360,0 L375,40 L420,55 Z" fill="white" opacity="0.6"/>
+        </svg>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <span style="color:rgba(255,255,255,0.3);font-size:0.55rem;letter-spacing:0.25em;font-family:monospace;">SITE CONTENT</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Masse brute déformée en 3D</h3>
+      <p>Une bordure monolithique irrégulière (pas symétrique), comme si du plâtre blanc avait été arraché. Toute la forme se déforme en rotateX/Y/skew au scroll — un seul mesh R3F qui se tord.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#111;width:100%;height:200px;position:relative;overflow:hidden;">
+        <svg width="100%" height="100%" viewBox="0 0 400 200" style="position:absolute;inset:0;">
+          <!-- bandes glitch horizontales top -->
+          <rect x="-5" y="0" width="410" height="8" fill="white" transform="skewX(-4)"/>
+          <rect x="-5" y="10" width="200" height="3" fill="white" transform="skewX(8) translate(80,0)"/>
+          <rect x="-5" y="15" width="410" height="5" fill="white" transform="skewX(2)"/>
+          <!-- bandes glitch bottom -->
+          <rect x="-5" y="188" width="410" height="8" fill="white" transform="skewX(4)"/>
+          <rect x="-5" y="181" width="180" height="3" fill="white" transform="skewX(-6) translate(120,0)"/>
+          <!-- côtés glitch -->
+          <rect x="0" y="0" width="7" height="200" fill="white" transform="skewY(-3)"/>
+          <rect x="8" y="60" width="3" height="80" fill="white" transform="skewY(5)"/>
+          <rect x="393" y="0" width="7" height="200" fill="white" transform="skewY(3)"/>
+          <rect x="389" y="40" width="3" height="100" fill="white" transform="skewY(-4)"/>
+        </svg>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <span style="color:rgba(255,255,255,0.3);font-size:0.55rem;letter-spacing:0.25em;font-family:monospace;">SITE CONTENT</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Glitch / bandes multiples</h3>
+      <p>Plusieurs bandes blanches décalées et skewées qui forment la bordure, style signal glitché. En 3D, chaque bande a sa propre profondeur z. Au scroll, elles se désalignent et se réalignent.</p>
+    </div>
+  </div>
+</div>

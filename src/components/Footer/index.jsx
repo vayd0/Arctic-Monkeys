@@ -26,7 +26,7 @@ export default function Footer() {
           {/* Left: credit + icons */}
           <div className="footer-info">
             <a
-              href="https://github.com/hkth"
+              href="https://github.com/vayd0"
               target="_blank"
               rel="noopener noreferrer"
               className="orbitron"
@@ -38,17 +38,17 @@ export default function Footer() {
                 textDecoration: "none",
               }}
             >
-              Made by HKTH ↗
+              Made by HKTH 
             </a>
 
             <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <a href="https://www.instagram.com/hkth.dev/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <img src="/icons/instagram.png" alt="Instagram" style={{ width: 32, height: 32, imageRendering: "pixelated" }} />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/in/th%C3%A9o-heck-728122241/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <img src="/icons/linkedin.png" alt="LinkedIn" style={{ width: 32, height: 32, imageRendering: "pixelated" }} />
               </a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <a href="https://github.com/vayd0" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                 <img src="/icons/github.png" alt="GitHub" style={{ width: 32, height: 32, imageRendering: "pixelated" }} />
               </a>
             </div>

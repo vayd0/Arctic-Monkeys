@@ -12,7 +12,7 @@ function Menu() {
   useEffect(() => {
     if (menuContainerRef.current) {
       gsap.set(menuContainerRef.current, {
-        bottom: isOpen ? "5rem" : "-16rem",
+        bottom: isOpen ? "5rem" : "-22rem",
       });
     }
     if (closeBtnRef.current) {
@@ -32,7 +32,7 @@ function Menu() {
 
   const openMenu = () => {
     gsap.to(menuContainerRef.current, {
-      bottom: "5rem",
+      bottom: "-2rem",
       duration: 0.1,
       ease: "cubic-bezier(0.10,0.01,0.03,0.99)",
     });
@@ -67,7 +67,7 @@ function Menu() {
   const closeMenu = () => {
     if (isOpen) {
       gsap.to(menuContainerRef.current, {
-        bottom: "-16rem",
+        bottom: "-22rem",
         duration: 0.1,
         ease: "cubic-bezier(0.10,0.01,0.03,0.99)",
       });
@@ -120,7 +120,7 @@ function Menu() {
         className="absolute bottom-[-20rem] right-[-2.5rem] md:right-[1.3rem] z-[400]"
         style={{ transition: "bottom 0.8s" }}
       >
-        <div className="relative w-[808px] h-[512px]">
+        <div className="relative w-[808px] h-[512px]" style={{ marginTop: "3rem" }}>
           <svg
             width="808"
             height="512"
@@ -172,14 +172,16 @@ function Menu() {
               <a
                 className="text-black text-2xl font-light orbitron cursor-pointer mr-[10rem] hover:italic hover:-skew-x-6 hover:font-medium transition-all duration-200"
                 href="#discover"
+                onClick={closeMenu}
               >
-                Discover
+                Découvrir
               </a>
               <a
                 className="text-black text-2xl font-light orbitron cursor-pointer mr-[10rem] hover:italic hover:-skew-x-6 hover:font-medium transition-all duration-200"
                 href="#musics"
+                onClick={closeMenu}
               >
-                Musics
+                Musiques
               </a>
             </section>
           )}

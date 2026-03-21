@@ -1,0 +1,78 @@
+<style>
+  .preview { background:#000; width:100%; height:220px; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+  .preview svg { position:absolute; inset:0; width:100%; height:100%; }
+  .label { position:absolute; color:rgba(255,255,255,0.2); font-size:0.5rem; letter-spacing:0.3em; font-family:monospace; text-transform:uppercase; }
+</style>
+
+<h2>Coins solides — blanc plein</h2>
+<p class="subtitle">Formes remplies, pas de stroke — les coins sont 100% blancs</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="preview">
+        <svg viewBox="0 0 400 220">
+          <!-- Cadre plein : rect blanc - rect noir intérieur -->
+          <rect x="0" y="0" width="400" height="220" rx="28" fill="#fff"/>
+          <rect x="14" y="14" width="372" height="192" rx="16" fill="#000"/>
+        </svg>
+        <div class="label">Arctic Monkeys</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Frame pleine (soustraction)</h3>
+      <p>Rect blanc plein rx:28, rect noir par-dessus rx:16. Les coins sont 100% blancs et arrondis. En R3F, un ShapeGeometry avec trou — se tord en 3D au scroll.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="preview" style="perspective:600px;">
+        <svg viewBox="0 0 400 220" style="transform:rotateX(16deg) rotateY(-7deg)">
+          <!-- Même technique mais trait épais -->
+          <rect x="0" y="0" width="400" height="220" rx="40" fill="#fff"/>
+          <rect x="20" y="20" width="360" height="180" rx="22" fill="#000"/>
+        </svg>
+        <div class="label">Arctic Monkeys</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Frame épaisse en 3D</h3>
+      <p>Même chose mais 20px d'épaisseur et radius 40px — plus imposant. Déjà incliné en 3D pour montrer l'effet scroll. Très solide visuellement.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="preview">
+        <svg viewBox="0 0 400 220">
+          <!-- Coins seuls, pleins — chaque coin = carré blanc avec trou noir -->
+          <!-- TL -->
+          <rect x="0" y="0" width="72" height="72" rx="28" fill="#fff"/>
+          <rect x="14" y="14" width="72" height="72" fill="#000"/>
+          <!-- TR -->
+          <rect x="328" y="0" width="72" height="72" rx="28" fill="#fff"/>
+          <rect x="314" y="14" width="72" height="72" fill="#000"/>
+          <!-- BL -->
+          <rect x="0" y="148" width="72" height="72" rx="28" fill="#fff"/>
+          <rect x="14" y="134" width="72" height="72" fill="#000"/>
+          <!-- BR -->
+          <rect x="328" y="148" width="72" height="72" rx="28" fill="#fff"/>
+          <rect x="314" y="134" width="72" height="72" fill="#000"/>
+          <!-- Tirets milieu bords -->
+          <rect x="186" y="2" width="28" height="6" rx="3" fill="#fff"/>
+          <rect x="186" y="212" width="28" height="6" rx="3" fill="#fff"/>
+          <rect x="2" y="107" width="6" height="6" rx="3" fill="#fff"/>
+          <rect x="392" y="107" width="6" height="6" rx="3" fill="#fff"/>
+        </svg>
+        <div class="label">Arctic Monkeys</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — 4 coins isolés + tirets</h3>
+      <p>Que les coins, chacun plein blanc avec découpe noire. Bords ouverts avec petits tirets au milieu. Très awwwards 2025 — chaque coin est un mesh R3F indépendant qui bouge différemment.</p>
+    </div>
+  </div>
+
+</div>

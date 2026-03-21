@@ -38,8 +38,8 @@ function Group() {
   };
 
   return (
-    <div className="relative w-screen h-screen mx-auto">
-      <article className="absolute -z-1 top-[0] left-[0] m-10 p-0 w-[120vw] h-[120vh]">
+    <div className="relative w-screen h-screen mx-auto isolate">
+      <article className="absolute -z-1 top-[0] left-[0] m-0 p-0 w-screen h-screen">
         <div
           style={{
             width: "100%",

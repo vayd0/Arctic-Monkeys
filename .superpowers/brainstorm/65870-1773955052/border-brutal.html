@@ -1,0 +1,87 @@
+<h2>Brut + arrondi</h2>
+<p class="subtitle">Masse, épaisseur, irrégularité — mais des courbes</p>
+
+<div class="cards">
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#000;width:100%;height:210px;position:relative;overflow:hidden;">
+        <svg width="100%" height="100%" viewBox="0 0 400 210" style="position:absolute;inset:0;">
+          <!-- Masse épaisse asymétrique, coins arrondis très expressifs -->
+          <path d="M0,0 L400,0 L400,210 L0,210 Z" fill="#000"/>
+          <!-- Bord top épais irrégulier -->
+          <path d="M-5,-5 Q50,5 130,0 Q200,-8 270,4 Q340,-2 405,-5 L405,28 Q360,18 280,22 Q210,30 130,18 Q60,28 -5,20 Z" fill="#fff"/>
+          <!-- Bord bottom épais irrégulier -->
+          <path d="M-5,215 Q70,205 150,210 Q230,218 310,206 Q360,200 405,215 L405,188 Q350,196 280,192 Q200,182 140,194 Q70,200 -5,192 Z" fill="#fff"/>
+          <!-- Bord left épais -->
+          <path d="M-5,-5 Q8,50 2,105 Q-4,160 -5,215 L28,215 Q20,165 24,110 Q30,55 22,-5 Z" fill="#fff"/>
+          <!-- Bord right épais -->
+          <path d="M405,-5 Q394,60 398,110 Q404,165 405,215 L378,215 Q372,160 376,108 Q382,55 374,-5 Z" fill="#fff"/>
+        </svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Masse irrégulière épaisse</h3>
+      <p>Les 4 bords sont des formes épaisses (~25px) avec des ondulations organiques. Asymétrique, aucun côté identique. En 3D, toute la forme pivote comme un bloc.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#000;width:100%;height:210px;position:relative;overflow:hidden;perspective:600px;">
+        <svg width="100%" height="100%" viewBox="0 0 400 210" style="position:absolute;inset:0;transform:rotateX(22deg) rotateY(-10deg) skewX(-1deg);">
+          <!-- Trait unique très épais et très irrégulier -->
+          <rect x="-5" y="-5" width="410" height="220" rx="0" fill="#000"/>
+          <path d="
+            M40,0
+            Q0,0 0,40
+            L0,170 Q0,210 38,210
+            L362,210 Q400,210 400,172
+            L400,38 Q400,0 362,0 Z
+          " fill="none" stroke="#fff" stroke-width="32" stroke-linejoin="round"
+             style="stroke-dasharray: none;"/>
+          <!-- sur-épaisseur coins bruts -->
+          <circle cx="38" cy="38" r="22" fill="#fff"/>
+          <circle cx="362" cy="38" r="22" fill="#fff"/>
+          <circle cx="38" cy="172" r="22" fill="#fff"/>
+          <circle cx="362" cy="172" r="22" fill="#fff"/>
+        </svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Trait épais + coins massifs 3D</h3>
+      <p>Stroke très épais arrondi, avec des disques blancs aux 4 coins qui débordent. Incliné en 3D au scroll — brut et solide.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#000;width:100%;height:210px;position:relative;overflow:hidden;">
+        <svg width="100%" height="100%" viewBox="0 0 400 210" style="position:absolute;inset:0;">
+          <!-- Bandes déchirées avec arrondis sur certains bouts -->
+          <!-- Top : 3 segments qui se chevauchent -->
+          <path d="M-5,0 Q30,-3 120,8 Q160,12 160,0 L-5,0 Z" fill="#fff"/>
+          <path d="M130,0 Q200,-5 280,10 Q310,14 310,0 L130,0 Z" fill="#fff"/>
+          <path d="M270,0 Q330,-4 405,6 L405,0 Z" fill="#fff"/>
+          <rect x="-5" y="0" width="415" height="16" rx="0" fill="none" stroke="#fff" stroke-width="16" style="clip-path:inset(0 0 50% 0)"/>
+          <!-- simplifié : juste des blocs chevauchants -->
+          <rect x="-5" y="-1" width="415" height="20" rx="8" fill="#fff"/>
+          <!-- Bottom -->
+          <rect x="-5" y="191" width="415" height="20" rx="8" fill="#fff"/>
+          <!-- Left -->
+          <rect x="-1" y="-5" width="20" height="220" rx="8" fill="#fff"/>
+          <!-- Right -->
+          <rect x="381" y="-5" width="20" height="220" rx="8" fill="#fff"/>
+          <!-- Surcharge aux coins : éclats qui dépassent -->
+          <ellipse cx="9" cy="9" rx="28" ry="16" fill="#fff" transform="rotate(-35 9 9)"/>
+          <ellipse cx="391" cy="9" rx="28" ry="16" fill="#fff" transform="rotate(35 391 9)"/>
+          <ellipse cx="9" cy="201" rx="28" ry="16" fill="#fff" transform="rotate(35 9 201)"/>
+          <ellipse cx="391" cy="201" rx="28" ry="16" fill="#fff" transform="rotate(-35 391 201)"/>
+        </svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Barres arrondies + éclats aux coins</h3>
+      <p>4 barres épaisses à bouts arrondis (pill), avec des éclats elliptiques aux coins qui cassent la régularité. Chaque barre = un mesh R3F avec rotation indépendante au scroll.</p>
+    </div>
+  </div>
+</div>

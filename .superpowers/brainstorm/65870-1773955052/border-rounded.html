@@ -1,0 +1,79 @@
+<h2>Bordure arrondie moderne</h2>
+<p class="subtitle">Formes brutes mais avec des courbes — blanc pur sur noir</p>
+
+<div class="cards">
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#000;width:100%;height:200px;position:relative;overflow:hidden;">
+        <svg width="100%" height="100%" viewBox="0 0 400 200" style="position:absolute;inset:0;">
+          <!-- Cadre arrondi déformé — path avec courbes bezier -->
+          <path d="
+            M30,0 Q0,0 0,30
+            L0,170 Q0,200 30,200
+            L370,200 Q400,200 400,170
+            L400,30 Q400,0 370,0 Z
+          " fill="none" stroke="#fff" stroke-width="14" stroke-linejoin="round"/>
+          <!-- déformation subtile sur un côté -->
+          <path d="
+            M15,0 Q0,0 0,15
+            L0,185 Q0,200 15,200
+            L385,200 Q400,200 400,185
+            L400,15 Q400,0 385,0 Z
+          " fill="none" stroke="#fff" stroke-width="3"/>
+        </svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Cadre arrondi double trait</h3>
+      <p>Un cadre épais + un trait fin décalé. En 3D, le double trait crée de la profondeur au scroll via rotateX/Y.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#000;width:100%;height:200px;position:relative;overflow:hidden;perspective:500px;">
+        <svg width="100%" height="100%" viewBox="0 0 400 200" style="position:absolute;inset:0;transform:rotateX(15deg) rotateY(-6deg);">
+          <!-- Blobs blancs arrondis aux coins/bords, asymétriques -->
+          <!-- Top -->
+          <path d="M-10,0 Q60,-8 200,6 Q340,18 410,0 L410,-10 L-10,-10 Z" fill="#fff"/>
+          <!-- Bottom -->
+          <path d="M-10,200 Q80,192 200,196 Q320,208 410,198 L410,210 L-10,210 Z" fill="#fff"/>
+          <!-- Left -->
+          <path d="M0,-10 Q-8,60 4,100 Q14,145 0,210 L-12,210 L-12,-10 Z" fill="#fff"/>
+          <!-- Right -->
+          <path d="M400,-10 Q412,50 406,100 Q398,158 402,210 L412,210 L412,-10 Z" fill="#fff"/>
+        </svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Bords coulés (liquid)</h3>
+      <p>Les bords sont des formes organiques courbes, comme du blanc qui "coule" sur les bords. En 3D incliné au scroll, l'effet est fluide et brut à la fois.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#000;width:100%;height:200px;position:relative;overflow:hidden;">
+        <svg width="100%" height="100%" viewBox="0 0 400 200" style="position:absolute;inset:0;">
+          <!-- Coins arrondis épais seulement, pas les bords complets -->
+          <!-- TL -->
+          <path d="M0,60 Q0,0 60,0 L60,0 Q20,0 0,40 Z" fill="#fff"/>
+          <path d="M0,55 L0,0 L55,0 Q8,2 2,55 Z" fill="#fff"/>
+          <!-- TR -->
+          <path d="M400,60 Q400,0 340,0 L340,0 Q380,0 400,40 Z" fill="#fff"/>
+          <path d="M400,55 L400,0 L345,0 Q392,2 398,55 Z" fill="#fff"/>
+          <!-- BL -->
+          <path d="M0,140 Q0,200 60,200 L60,200 Q20,200 0,160 Z" fill="#fff"/>
+          <path d="M0,145 L0,200 L55,200 Q8,198 2,145 Z" fill="#fff"/>
+          <!-- BR -->
+          <path d="M400,140 Q400,200 340,200 L340,200 Q380,200 400,160 Z" fill="#fff"/>
+          <path d="M400,145 L400,200 L345,200 Q392,198 398,145 Z" fill="#fff"/>
+        </svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Coins arrondis épais seulement</h3>
+      <p>Que les 4 coins, arrondis et massifs. Chaque coin est un mesh R3F indépendant qui pivote différemment au scroll — le reste du bord est vide.</p>
+    </div>
+  </div>
+</div>
